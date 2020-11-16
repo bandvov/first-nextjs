@@ -1,0 +1,21 @@
+{
+  "name": "first-nextjs",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "serve": "concurrently \"yarn dev\"  \"yarn mock\"",
+    "mock": "json-server -w db.json -p 4200 -d 250"
+  },
+  "dependencies": {
+    "@material-ui/core": "^4.11.0",
+    "@material-ui/styles": "^4.10.0",
+    "concurrently": "^5.3.0",
+    "json-server": "^0.16.2",
+    "next": "9.5.5",
+    "react": "16.14.0",
+    "react-dom": "16.14.0"
+  }
+}
