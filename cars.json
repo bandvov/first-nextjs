@@ -1,63 +1,46 @@
 {
-  "posts": [
-    {
-      "id": 1,
-      "title": "What is Lorem Ipsum?",
-      "body": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
-    },
-    {
-      "id": 2,
-      "title": "Why do we use it?",
-      "body": "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like)."
-    },
-    {
-      "id": 3,
-      "title": "Where does it come from?",
-      "body": "Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, comes from a line in section 1.10.32."
-    }
-  ],
   "cars": [
     {
       "brand": "Volkswagen",
       "model": "Touran Highline 1Hd",
       "year": 2014,
-      "first owner": true,
+      "firstOwner": true,
       "price": 12000,
       "mileage": 44986,
       "photo": "https://cloud.leparking.fr/2019/11/16/01/35/volkswagen-touran-volkswagen-touran-highline-automatik-1-hd-sehr-gepflegt-top-blau_7269914132.jpg",
       "engine": "Gasoline",
       "transmission": "automatic",
       "categories": "Minibus",
-      "external color": "Blue Metallic",
-      "color simple name": "blue"
+      "externalColor": "Blue Metallic",
+      "colorSimpleName": "blue"
     },
     {
       "brand": "Volkswagen",
       "model": "Tiguan Sport & Style 4Motion",
       "year": 2009,
-      "first owner": false,
+      "firstOwner": false,
       "price": 9900,
       "mileage": 100000,
       "photo": "https://i.ebayimg.com/00/s/MTA2MFgxNjAw/z/TwsAAOSwmRVfV4vO/$_20.jpg",
       "engine": "Gasoline",
       "transmission": "Manual",
       "categories": "Pickup",
-      "external color": "White",
-      "color simple name": "White"
+      "externalColor": "White",
+      "colorSimpleName": "White"
     },
     {
       "brand": "Volkswagen",
       "model": "Passat Comfortline BMT 2.0 TDI DSG",
       "year": 2017,
-      "first owner": false,
+      "firstOwner": false,
       "price": 17500,
       "mileage": 107000,
       "photo": "https://www.bazos.sk/img/1/899/116464899.jpg?t=1601413866",
       "engine": "Diesel",
       "transmission": "automatic",
       "categories": "Saloon",
-      "external color": "White",
-      "color simple name": "White"
+      "externalColor": "White",
+      "colorSimpleName": "White"
     },
     {
       "brand": "Volkswagen",
@@ -70,8 +53,8 @@
       "engine": "Diesel",
       "transmission": "Manual",
       "categories": "Saloon",
-      "external color": "Blue metallic",
-      "color simple name": "blue"
+      "externalColor": "Blue metallic",
+      "colorSimpleName": "blue"
     },
     {
       "brand": "Volkswagen",
@@ -84,8 +67,8 @@
       "engine": "Gasoline",
       "transmission": "Manual",
       "categories": "Saloon",
-      "external color": "Red",
-      "color simple name": "Red"
+      "externalColor": "Red",
+      "colorSimpleName": "Red"
     },
     {
       "brand": "BMW",
@@ -98,22 +81,22 @@
       "engine": "Diesel",
       "transmission": "Manual",
       "categories": "Saloon",
-      "external color": "Black",
-      "color simple name": "Black"
+      "externalColor": "Black",
+      "colorSimpleName": "Black"
     },
     {
       "brand": "BMW",
       "model": "Baureihe 4 Gran Coupe 420",
       "year": 2016,
-      "first owner": true,
+      "firstOwner": true,
       "price": 22300,
       "mileage": 77000,
       "photo": "https://i.ebayimg.com/00/s/MTA2N1gxNjAw/z/4twAAOSwGOZfmBqC/$_20.jpg",
       "engine": "Diesel",
       "transmission": "Automatic",
       "categories": "Saloon",
-      "external color": "White Metallic",
-      "color simple name": "White"
+      "externalColor": "White Metallic",
+      "colorSimpleName": "White"
     },
     {
       "brand": "BMW",
@@ -126,8 +109,8 @@
       "engine": "Gasoline",
       "transmission": "Manual",
       "categories": "Coupe",
-      "external color": "Red Metallic",
-      "color simple name": "red"
+      "externalColor": "Red Metallic",
+      "colorSimpleName": "red"
     },
     {
       "brand": "BMW",
@@ -140,22 +123,22 @@
       "engine": "Gasoline",
       "transmission": "Automatic",
       "categories": "Saloon",
-      "external color": "White Metallic",
-      "color simple name": "White"
+      "externalColor": "White Metallic",
+      "colorSimpleName": "White"
     },
     {
       "brand": "BMW",
       "model": "2 28i Steptronic M Sport Cabrio +Bi-Xenon",
       "year": 2018,
-      "first owner": true,
+      "firstOwner": true,
       "price": 25300,
       "mileage": 95000,
       "photo": "https://dsjkerm4z0vii.cloudfront.net/sites/default/files/styles/vehicle_big/public/vehicleimages/16067/HHN577706_1.jpg",
       "engine": "Gasoline",
       "transmission": "Automatic",
       "categories": "Coupe",
-      "external color": "White Metallic",
-      "color simple name": "White"
+      "externalColor": "White Metallic",
+      "colorSimpleName": "White"
     },
     {
       "brand": "BMW",
@@ -168,8 +151,8 @@
       "engine": "Gasoline",
       "transmission": "Automatic",
       "categories": "Coupe",
-      "external color": "Blue Metallic",
-      "color simple name": "Blue"
+      "externalColor": "Blue Metallic",
+      "colorSimpleName": "Blue"
     },
     {
       "brand": "Audi",
@@ -182,10 +165,9 @@
       "engine": "Gasoline",
       "transmission": "Automatic",
       "categories": "Coupe",
-      "external color": "Blue",
-      "color simple name": "Blue"
+      "externalColor": "Blue",
+      "colorSimpleName": "Blue"
     },
-
     {
       "brand": "Audi",
       "model": "S5 3.0 TFSI Sportback quattro",
@@ -197,8 +179,8 @@
       "engine": "Gasoline",
       "transmission": "Manual",
       "categories": "Coupe",
-      "external color": "Red",
-      "color simple name": "Red"
+      "externalColor": "Red",
+      "colorSimpleName": "Red"
     },
     {
       "brand": "Audi",
@@ -211,8 +193,8 @@
       "engine": "Gasoline",
       "transmission": "Manual",
       "categories": "Coupe",
-      "external color": "White Metallic",
-      "color simple name": "white"
+      "externalColor": "White Metallic",
+      "colorSimpleName": "white"
     },
     {
       "brand": "Audi",
@@ -225,8 +207,8 @@
       "engine": "Gasoline",
       "transmission": "Manual",
       "categories": "SUV",
-      "external color": "White Metallic",
-      "color simple name": "white"
+      "externalColor": "White Metallic",
+      "colorSimpleName": "white"
     },
     {
       "brand": "Audi",
@@ -239,8 +221,8 @@
       "engine": "Gasoline",
       "transmission": "Manual",
       "categories": "Saloon",
-      "external color": "Grey Metallic",
-      "color simple name": "grey"
+      "externalColor": "Grey Metallic",
+      "colorSimpleName": "grey"
     }
   ]
 }

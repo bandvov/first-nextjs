@@ -1,15 +1,10 @@
 import Link from "next/link";
-import styles from "../styles/error.module.css";
-export default function CustomError() {
+
+export default function Error() {
   return (
     <>
-      <h2 className={styles.error}>404 Error.</h2>
-      <p>Please return to main</p>
-      <Link href="/">
-        <a>
-          <button>to main</button>
-        </a>
-      </Link>
+      <h1>Car not found</h1>
+      <Link href="/"><span>Go to main</span></Link>
     </>
   );
 }
