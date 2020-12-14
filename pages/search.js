@@ -1,22 +1,58 @@
-import Filter from '../components/filters';
+import { gql } from 'apollo-boost';
+import { Paper } from '@material-ui/core';
+import PropTypes from 'prop-types';
+import { client } from '../utils/client';
+import Filters from '../components/filters';
+import { CarListItem } from '../components/car-list-item/car-list-item';
 import MainLayout from '../components/main-layout';
-import { getFilteredCars } from '../operations/car-operations';
+import styles from '../styles/Home.module.css';
 
-export default function Search({ cars }) {
+export default function Search({ cars = [] }) {
+  const mapped = cars.map((car) => <CarListItem key={car._id} {...car} />);
   return (
     <MainLayout>
-      search
-      <Filter />
-      <pre>{JSON.stringify(cars, null, 2)}</pre>
+      <Filters />
+      {cars && <Paper className={styles.cars}>{mapped}</Paper>}
     </MainLayout>
   );
 }
 
-export async function getServerSideProps(ctx) {
-  const cars = await getFilteredCars(ctx.query);
+export const getServerSideProps = async (ctx) => {
+  const res = await client.query({
+    query: gql`
+      query($filter: FilterInput!) {
+        getFilteredCars(filter: $filter) {
+          _id
+          brand
+          model
+          year
+          photo
+          price
+          mileage
+        }
+      }
+    `,
+    variables: {
+      filter: ctx.query,
+    },
+  });
+
   return {
     props: {
-      cars,
+      cars: res.data.getFilteredCars,
     },
   };
-}
+};
+
+Search.propTypes = PropTypes.shape({
+  cars: PropTypes.arrayOf(
+    PropTypes.shape({
+      _id: PropTypes.string.isRequired,
+      brand: PropTypes.string.isRequired,
+      mileage: PropTypes.string.isRequired,
+      model: PropTypes.string.isRequired,
+      photo: PropTypes.string.isRequired,
+      price: PropTypes.string.isRequired,
+    }).isRequired
+  ).isRequired,
+}).isRequired;

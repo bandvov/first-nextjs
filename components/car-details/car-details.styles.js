@@ -2,13 +2,19 @@ import { makeStyles } from "@material-ui/core";
 
 export const useStyles = makeStyles({
   root: {
+    alignItems: "center",
+    justifyContent: "end",
     margin: "1rem",
     display: "grid",
-    transition: "0.3s ease-in-out",
     padding: "0.5rem",
+    maxWidth: "60vw",
     gridTemplateAreas: "\"image text\"",
+    "@media (max-width:1280px)": {
+      maxWidth: "80vw",
+    },
     "@media (max-width:1000px)": {
       gridTemplateAreas: "\"image\" \"text\"",
+      maxWidth: "100%",
     },
   },
   image: {
@@ -17,14 +23,8 @@ export const useStyles = makeStyles({
     display: "grid",
   },
   img: {
-    height: "30vw",
-    transition: "0.3s ease-in-out",
-    "@media (max-width:1000px)": {
-      height: "50vw",
-    },
-    "@media (max-width:500px)": {
-      height: "60vw",
-    },
+    maxHeigh: "100%",
+    maxWidth: "100%",
   },
   text: {
     display: "grid",
@@ -33,8 +33,10 @@ export const useStyles = makeStyles({
     padding: "0 1rem",
     alignSelf: "stretch",
     transition: "0.3s ease-in-out",
+    maxWidth: "30vw",
     "@media (max-width:1000px)": {
       padding: "1rem 0 0",
+      maxWidth: "100%",
     },
   },
   deleteButton: {

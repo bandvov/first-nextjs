@@ -35,5 +35,5 @@ yarn-error.log*
 /.idea
 .env
 yarn.lock
-
+package-lock.json
 /out

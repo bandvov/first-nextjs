@@ -12,12 +12,6 @@ export const useStyles = makeStyles((theme) => ({
     display: "grid",
     alignItems: "stretch",
 
-    "@media (max-width:959px)": {
-      height: "17vw",
-    },
-    "@media (min-width:320px)": {
-      height: "100%",
-    },
   },
   image: (props) => ({
     alignSelf: "stretch",

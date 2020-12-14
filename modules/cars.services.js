@@ -1,3 +1,4 @@
+import { brands } from '../configs';
 import Cars from './cars.model';
 
 class CarsServices {
@@ -13,8 +14,8 @@ class CarsServices {
     return await new Cars(car).save();
   }
 
-  updateCar({ id, car }) {
-    return Cars.findByIdAndUpdate(id, { $set: car }, { new: true });
+  async updateCar({ id, car }) {
+    return await Cars.findByIdAndUpdate(id, { $set: car }, { new: true });
   }
 
   deleteCar({ id }) {
@@ -28,24 +29,27 @@ class CarsServices {
 
   configureFilter(data) {
     const filter = {};
-    const { brand, model, year, color, searchText } = data;
+    let { brand, model, year = [], color, searchText } = data;
+    brand = brand.filter((item) => item !== '');
+    color = color.filter((item) => item !== '');
+    year = year.filter((item) => item !== '');
     if (brand) {
-      filter.brand = { $in: brand.map((value) => new RegExp(value, 'i')) };
+      filter.brand = new RegExp(brand, 'i');
     }
     if (model) {
       filter.model = { $in: model.map((value) => new RegExp(value, 'i')) };
     }
-    if (year) {
-      filter.year = { $in: year };
+    if (year.length) {
+      filter.year = { $in: year.map((value) => +value) };
     }
     if (color) {
-      filter.colorSimpleName = {
-        $in: color.map((value) => new RegExp(value, 'i')),
-      };
+      filter.colorSimpleName = new RegExp(color, 'i');
     }
+
     if (searchText) {
       filter.description = new RegExp(searchText, 'i');
     }
+   
     return filter;
   }
 }

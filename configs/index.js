@@ -1,5 +1,12 @@
-export const colors = ["white", "black", "red", "blue", "grey"];
-export const brands = ["Audi", "BMW", "Opel", "Toyota", "Mercedes-Benz", "Volkswagen"];
+export const colors = ['white', 'black', 'red', 'blue', 'grey'];
+export const brands = [
+  'Audi',
+  'BMW',
+  'Opel',
+  'Toyota',
+  'Mercedes-Benz',
+  'Volkswagen',
+];
 
 export const years = [
   2020,
@@ -22,4 +29,5 @@ export const years = [
   2003,
   2002,
   2001,
-  2000];
+  2000,
+];

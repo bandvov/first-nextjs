@@ -1,5 +1,5 @@
-import { gql } from 'apollo-boost';
-import { client } from '../utils/client';
+import { gql } from "apollo-boost";
+import { client } from "../utils/client";
 
 export const getAllCars = async () => {
   const res = await client.query({
@@ -12,6 +12,7 @@ export const getAllCars = async () => {
           photo
           price
           year
+          mileage
         }
       }
     `,
@@ -47,6 +48,8 @@ export const getCarById = async (id) => {
           externalColor
           photo
           engine
+          colorSimpleName
+          description
         }
       }
     `,
@@ -57,6 +60,9 @@ export const getCarById = async (id) => {
 };
 
 export const addCar = async (car) => {
+  car.price = +car.price;
+  car.year = +car.year;
+  car.mileage = +car.mileage;
   const res = await client.mutate({
     mutation: gql`
       mutation($car: CarInput!) {
@@ -71,6 +77,23 @@ export const addCar = async (car) => {
   return res.data.addCar;
 };
 
+export const updateCar = async ({ id, car }) => {
+  car.price = +car.price;
+  car.year = +car.year;
+  car.mileage = +car.mileage;
+  const res = await client.mutate({
+    mutation: gql`
+      mutation($id: ID!, $car: CarInput!) {
+        updateCar(id: $id, car: $car) {
+          _id
+        }
+      }
+    `,
+    variables: { id, car },
+  });
+
+  return res.data.updateCar;
+};
 export const deleteCar = async (id) => {
   const res = await client.mutate({
     mutation: gql`
@@ -82,8 +105,11 @@ export const deleteCar = async (id) => {
     `,
     variables: { id },
   });
+
+  return res.data.deleteCar;
 };
-export const getFilteredCars = async (filter) => {
+
+export const getFilteredCars = async ({ filter }) => {
   const res = await client.query({
     query: gql`
       query($filter: FilterInput!) {
@@ -99,6 +125,5 @@ export const getFilteredCars = async (filter) => {
     `,
     variables: { filter },
   });
-
   return res.data.getFilteredCars;
 };
