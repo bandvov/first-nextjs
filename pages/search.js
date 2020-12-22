@@ -15,6 +15,7 @@ export default function Search({ cars = [] }) {
   useEffect(() => {
     send({ type: 'SET_LOADING', loading: false });
   }, [cars]);
+  
   const mapped = cars.map((car) => <CarListItem key={car._id} {...car} />);
 
   return (
