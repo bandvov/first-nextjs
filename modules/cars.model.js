@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 const { Schema } = mongoose;
 
@@ -11,12 +11,16 @@ const cars = new Schema({
   photo: String,
   engine: String,
   transmission: String,
-  categories: [String],
+  category: String,
   externalColor: String,
   colorSimpleName: String,
   description: String,
+  date: {
+    type: String,
+    default: Date.now(),
+  },
 });
 
 export default mongoose.models && mongoose.models.cars
   ? mongoose.models.cars
-  : mongoose.model('cars', cars);
+  : mongoose.model("cars", cars, "cars");

@@ -1,64 +1,85 @@
-import { Machine } from 'xstate';
+import { Machine } from "xstate";
 
 const defaultFilter = {
-  brand: '',
-  color: '',
-  year: '',
+  brand: "",
+  color: "",
+  minYear: "",
+  maxYear: "",
+  minPrice: "",
+  maxPrice: "",
+  searchText: "",
 };
 export const carMachine = Machine(
   {
-    id: 'global',
-    initial: 'hide',
+    id: "filter",
+    initial: "initial",
     context: {
       filter: defaultFilter,
       open: false,
-      text: '',
+      text: "",
       handler: () => {},
       push: () => {},
-      id: '',
+      id: "",
+      loading: true,
     },
     states: {
-      hide: {
+      initial: {
         on: {
           SHOW: {
-            target: 'show',
-            actions: ['showDialog'],
+            target: "show",
+            actions: ["showDialog"],
           },
           ADD_BRAND: {
-            target: 'hide',
-            actions: ['addBrandToStore'],
+            target: "initial",
+            actions: ["addBrandToStore"],
           },
           ADD_COLOR: {
-            target: 'hide',
-            actions: ['addColorToStore'],
+            target: "initial",
+            actions: ["addColorToStore"],
           },
-          ADD_YEAR: {
-            target: 'hide',
-            actions: ['addYearToStore'],
+          ADD_MINYEAR: {
+            target: "initial",
+            actions: ["addMinYearToStore"],
+          },
+          ADD_MAXYEAR: {
+            target: "initial",
+            actions: ["addMaxYearToStore"],
+          },
+          ADD_MINPRICE: {
+            target: "initial",
+            actions: ["addMinPriceToStore"],
+          },
+          ADD_MAXPRICE: {
+            target: "initial",
+            actions: ["addMaxPriceToStore"],
           },
           ADD_SEARCH_TEXT: {
-            target: 'hide',
-            actions: ['addSearchText'],
+            target: "initial",
+            actions: ["addSearchText"],
           },
           CLEAR_FILTER: {
-            target: 'hide',
-            actions: ['clearFilter'],
+            target: "initial",
+            actions: ["clearFilter"],
           },
           SET_FILTERS: {
-            target: 'hide',
-            actions: ['setAllFilters'],
+            target: "initial",
+            actions: ["setAllFilters"],
+          },
+          SET_LOADING: {
+            target: "initial",
+            actions: ["setLoading"],
           },
         },
       },
       show: {
         on: {
           DELETE: {
-            target: 'hide',
-            actions: ['runHandler', 'hideDialog', 'clearData', 'push'],
+            target: "initial",
+            actions: ["runHandler", "hideDialog", "clearData", "push"],
           },
           CANCEL: {
-            target: 'hide',
-            actions: ['hideDialog', 'clearData'],
+            target: "initial",
+            actions: ["hideDialog", "clearData"],
           },
         },
       },
@@ -79,18 +100,31 @@ export const carMachine = Machine(
         ctx.handler();
       },
       clearData: (ctx) => {
-        ctx.text = '';
+        ctx.text = "";
         ctx.handler = () => {};
       },
       clearFilter: (ctx) => {
-        ctx.filter = defaultFilter;
+        ctx.filter = {
+          brand: "",
+          color: "",
+          maxPrice: "",
+          maxYear: "",
+          minPrice: "",
+          minYear: "",
+          searchText: "",
+        };
       },
       push: (ctx) => ctx.push(),
       addBrandToStore: (ctx, evt) => (ctx.filter.brand = evt.brand),
       addColorToStore: (ctx, evt) => (ctx.filter.color = evt.color),
       addYearToStore: (ctx, evt) => (ctx.filter.year = evt.year),
+      addMinYearToStore: (ctx, evt) => (ctx.filter.minYear = evt.minYear),
+      addMaxYearToStore: (ctx, evt) => (ctx.filter.maxYear = evt.maxYear),
+      addMinPriceToStore: (ctx, evt) => (ctx.filter.minPrice = evt.minPrice),
+      addMaxPriceToStore: (ctx, evt) => (ctx.filter.maxPrice = evt.maxPrice),
       addSearchText: (ctx, evt) => (ctx.filter.searchText = evt.searchText),
       setAllFilters: (ctx, evt) => (ctx.filter = evt.filter),
+      setLoading: (ctx, evt) => (ctx.loading = evt.loading),
     },
-  }
+  },
 );

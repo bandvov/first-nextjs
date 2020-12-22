@@ -1,21 +1,26 @@
-import { brands } from '../configs';
 import Cars from './cars.model';
 
 class CarsServices {
-  getAllCars() {
-    return Cars.find();
+  async getAllCars() {
+    const cars = await Cars.find().sort({ year: -1 });
+    const count = await Cars.countDocuments();
+    return { cars, count };
   }
 
-  getCarById({ id }) {
-    return Cars.findById(id);
+  async getCarById({ id }) {
+    const car = await Cars.findById(id);
+    if (!car) {
+      throw new Error('car not found');
+    }
+    return car;
   }
 
   async addCar({ car }) {
     return await new Cars(car).save();
   }
 
-  async updateCar({ id, car }) {
-    return await Cars.findByIdAndUpdate(id, { $set: car }, { new: true });
+  updateCar({ id, car }) {
+    return Cars.findByIdAndUpdate(id, { $set: car }, { new: true });
   }
 
   deleteCar({ id }) {
@@ -29,27 +34,48 @@ class CarsServices {
 
   configureFilter(data) {
     const filter = {};
-    let { brand, model, year = [], color, searchText } = data;
-    brand = brand.filter((item) => item !== '');
-    color = color.filter((item) => item !== '');
-    year = year.filter((item) => item !== '');
+    const {
+      brand,
+      model,
+      minYear = 1990,
+      maxYear = 2022,
+      minPrice = 0,
+      maxPrice = 222222,
+      color,
+      searchText,
+    } = data;
+
     if (brand) {
       filter.brand = new RegExp(brand, 'i');
     }
+
     if (model) {
-      filter.model = { $in: model.map((value) => new RegExp(value, 'i')) };
+      filter.model = new RegExp(model, 'i');
     }
-    if (year.length) {
-      filter.year = { $in: year.map((value) => +value) };
+
+    if (minPrice) {
+      filter.price = { $gte: +minPrice, $lte: minPrice };
     }
+
+    if (maxPrice) {
+      filter.price = { $gte: minPrice, $lte: +maxPrice };
+    }
+
+    if (minYear) {
+      filter.year = { $gte: +minYear, $lte: +maxYear };
+    }
+
+    if (maxYear) {
+      filter.year = { $gte: +minYear, $lte: +maxYear };
+    }
+
     if (color) {
       filter.colorSimpleName = new RegExp(color, 'i');
     }
-
     if (searchText) {
       filter.description = new RegExp(searchText, 'i');
     }
-   
+
     return filter;
   }
 }

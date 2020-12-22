@@ -1,18 +1,21 @@
-import { gql } from "apollo-boost";
-import { client } from "../utils/client";
+import { gql } from 'apollo-boost';
+import { client } from '../utils/client';
 
 export const getAllCars = async () => {
   const res = await client.query({
     query: gql`
       query {
         getAllCars {
-          _id
-          brand
-          model
-          photo
-          price
-          year
-          mileage
+          cars {
+            _id
+            brand
+            model
+            photo
+            price
+            year
+            mileage
+          }
+          count
         }
       }
     `,
@@ -25,13 +28,17 @@ export const getCarsId = async () => {
     query: gql`
       query {
         getAllCars {
-          _id
+          cars {
+            _id
+          }
+          count
         }
       }
     `,
+    fetchPolicy: 'no-cache',
   });
   client.resetStore();
-  return res.data.getAllCars;
+  return res.data.getAllCars.cars;
 };
 export const getCarById = async (id) => {
   const res = await client.query({
@@ -41,6 +48,8 @@ export const getCarById = async (id) => {
           _id
           brand
           model
+          category
+          date
           price
           year
           mileage
@@ -81,6 +90,7 @@ export const updateCar = async ({ id, car }) => {
   car.price = +car.price;
   car.year = +car.year;
   car.mileage = +car.mileage;
+
   const res = await client.mutate({
     mutation: gql`
       mutation($id: ID!, $car: CarInput!) {
@@ -89,7 +99,10 @@ export const updateCar = async ({ id, car }) => {
         }
       }
     `,
-    variables: { id, car },
+    variables: {
+      id,
+      car,
+    },
   });
 
   return res.data.updateCar;
@@ -109,7 +122,7 @@ export const deleteCar = async (id) => {
   return res.data.deleteCar;
 };
 
-export const getFilteredCars = async ({ filter }) => {
+export const getFilteredCars = async (filter) => {
   const res = await client.query({
     query: gql`
       query($filter: FilterInput!) {
@@ -120,6 +133,7 @@ export const getFilteredCars = async ({ filter }) => {
           photo
           price
           year
+          mileage
         }
       }
     `,

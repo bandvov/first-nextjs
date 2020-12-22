@@ -1,6 +1,7 @@
 import "../styles/globals.css";
 import PropTypes from "prop-types";
 import { useMachine } from "@xstate/react";
+
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { MainContext } from "../context/mainContext";

@@ -1,19 +1,18 @@
-import Grid from "@material-ui/core/Grid";
-import Paper from "@material-ui/core/Paper";
-import { Button, CircularProgress, TextField } from "@material-ui/core";
-import { useFormik } from "formik";
-import * as Yup from "yup";
-import { Image } from "@material-ui/icons";
-import { useContext } from "react";
-import Router from "next/router";
-import Link from "next/link";
-import { useStyles } from "./car-form.styles";
-import { carValidationMessages } from "../../configs/validation";
-import { carRegExp } from "../../configs/regexpSchemas";
-import { colors, years } from "../../configs";
-import { MainContext } from "../../context/mainContext";
-import { addCar, updateCar } from "../../operations/car-operations";
-import { loading } from "../Loading";
+import Grid from '@material-ui/core/Grid';
+import Paper from '@material-ui/core/Paper';
+import { Button, TextField } from '@material-ui/core';
+import { useFormik } from 'formik';
+import * as Yup from 'yup';
+import { Image } from '@material-ui/icons';
+import { useContext } from 'react';
+import Router from 'next/router';
+import Link from 'next/link';
+import { useStyles } from './car-form.styles';
+import { carValidationMessages } from '../../configs/validation';
+import { carRegExp } from '../../configs/regexpSchemas';
+import { colors, years, categories } from '../../configs';
+import { MainContext } from '../../context/mainContext';
+import { addCar, updateCar } from '../../operations/car-operations';
 
 const {
   MIN_LENGTH_MESSAGE,
@@ -28,21 +27,18 @@ export function CarForm({ edit = false, car = {} }) {
 
   const addCarhandler = (car) => {
     send({
-      type: "SHOW",
-      text: "Are you sure you want to add the car?",
+      type: 'SHOW',
+      text: 'Are you sure you want to add the car?',
       handler: () => addCar(car),
-      push: () => Router.push("/"),
+      push: () => Router.push('/'),
     });
   };
   const updateCarhandler = (data) => {
-    data.year = +data.year;
-    data.price = +data.price;
-    data.mileage = +data.mileage;
     send({
-      type: "SHOW",
-      text: "Are you sure you want to update the car data?",
+      type: 'SHOW',
+      text: 'Are you sure you want to update the car data?',
       handler: () => updateCar(data),
-      push: () => Router.push("/"),
+      push: () => Router.push('/'),
     });
   };
 
@@ -50,6 +46,10 @@ export function CarForm({ edit = false, car = {} }) {
     <option key={color}>{color}</option>
   ));
   const mappedYears = years.map((year) => <option key={year}>{year}</option>);
+
+  const mappedCategories = categories.map((category) => (
+    <option key={category}>{category}</option>
+  ));
 
   const formSchema = Yup.object().shape({
     brand: Yup.string()
@@ -99,29 +99,29 @@ export function CarForm({ edit = false, car = {} }) {
       .min(2, MIN_LENGTH_MESSAGE)
       .max(100, MAX_LENGTH_MESSAGE)
       .required(VALIDATION_ERROR),
+
+    category: Yup.string()
+      .min(2, MIN_LENGTH_MESSAGE)
+      .max(100, MAX_LENGTH_MESSAGE)
+      .required(VALIDATION_ERROR),
   });
 
-  const {
-    values,
-    handleChange,
-    handleSubmit,
-    errors,
-    touched,
-  } = useFormik({
+  const { values, handleChange, handleSubmit, errors, touched } = useFormik({
     validationSchema: formSchema,
     validateOnBlur: true,
     initialValues: {
-      brand: car.brand || "",
-      year: car.year || "",
-      model: car.model || "",
-      photo: car.photo || "",
-      price: car.price || "",
-      engine: car.engine || "",
-      mileage: car.mileage || "",
-      description: car.description || "",
-      transmission: car.transmission || "",
-      externalColor: car.externalColor || "",
-      colorSimpleName: car.colorSimpleName || "",
+      brand: car.brand || '',
+      year: car.year || '',
+      model: car.model || '',
+      photo: car.photo || '',
+      price: car.price || '',
+      engine: car.engine || '',
+      mileage: car.mileage || '',
+      description: car.description || '',
+      transmission: car.transmission || '',
+      externalColor: car.externalColor || '',
+      colorSimpleName: car.colorSimpleName || '',
+      category: car.category || '',
     },
     onSubmit: (data) => {
       if (edit) {
@@ -131,7 +131,7 @@ export function CarForm({ edit = false, car = {} }) {
     },
   });
 
-  return (loading() ? <CircularProgress /> : (
+  return (
     <Paper elevation={10}>
       <form onSubmit={handleSubmit}>
         <Paper className={classes.paper}>
@@ -141,29 +141,26 @@ export function CarForm({ edit = false, car = {} }) {
               md={4}
               id="photo div"
               style={{
-                padding: "1rem",
-                display: "grid",
-                justifyItems: "center",
-                alignItems: "center",
-                minHeight: "10rem",
+                padding: '1rem',
+                display: 'grid',
+                justifyItems: 'center',
+                alignItems: 'center',
+                minHeight: '10rem',
               }}
             >
               {values.photo ? (
                 <img
                   alt="car"
-                  style={{ maxWidth: "100%", height: "auto" }}
+                  style={{ maxWidth: '100%', height: 'auto' }}
                   src={values.photo}
                 />
-              ) : <Image style={{ width: "100%", height: "100%" }} />}
+              ) : (
+                <Image style={{ width: '100%', height: '100%' }} />
+              )}
             </Grid>
             <Grid container md={8}>
-              <Grid container md={12} style={{ padding: "1rem" }}>
-                <Grid
-                  xs={12}
-                  sm={12}
-                  md={12}
-                  style={{ padding: "1rem 1rem 0" }}
-                >
+              <Grid container md={12} style={{ padding: '1rem' }}>
+                <Grid sm={12} md={12} style={{ padding: '1rem 1rem 0' }}>
                   <div className={classes.inputMargin}>
                     <TextField
                       error={touched.photo && errors.photo}
@@ -181,13 +178,7 @@ export function CarForm({ edit = false, car = {} }) {
                     )}
                   </div>
                 </Grid>
-                <Grid
-                  item
-                  style={{ padding: "0 1rem" }}
-                  xs={12}
-                  sm={12}
-                  md={6}
-                >
+                <Grid item style={{ padding: '0 1rem' }} xs={12} sm={12} md={6}>
                   <div className={classes.inputMargin}>
                     <TextField
                       name="brand"
@@ -250,9 +241,7 @@ export function CarForm({ edit = false, car = {} }) {
                       value={values.engine}
                     />
                     {touched.engine && errors.engine && (
-                      <div className={classes.inputError}>
-                        {errors.engine}
-                      </div>
+                      <div className={classes.inputError}>{errors.engine}</div>
                     )}
                   </div>
                   <div className={classes.inputMargin}>
@@ -274,13 +263,7 @@ export function CarForm({ edit = false, car = {} }) {
                     )}
                   </div>
                 </Grid>
-                <Grid
-                  item
-                  style={{ padding: "0 1rem" }}
-                  xs={12}
-                  sm={12}
-                  md={6}
-                >
+                <Grid item style={{ padding: '0 1rem' }} xs={12} sm={12} md={6}>
                   <div className={classes.inputMargin}>
                     <TextField
                       name="mileage"
@@ -294,18 +277,14 @@ export function CarForm({ edit = false, car = {} }) {
                       value={values.mileage}
                     />
                     {touched.mileage && errors.mileage && (
-                      <div className={classes.inputError}>
-                        {errors.mileage}
-                      </div>
+                      <div className={classes.inputError}>{errors.mileage}</div>
                     )}
                   </div>
 
                   <div className={classes.inputMargin}>
                     <TextField
                       name="colorSimpleName"
-                      error={
-                        touched.colorSimpleName && errors.colorSimpleName
-                      }
+                      error={touched.colorSimpleName && errors.colorSimpleName}
                       placeholder="Simple color"
                       select
                       label="Simple color"
@@ -358,13 +337,36 @@ export function CarForm({ edit = false, car = {} }) {
                       onChange={handleChange}
                       value={values.transmission}
                     >
-
+                      <option>{''}</option>
                       <option>Automatic</option>
                       <option>Manual</option>
+                      <option>Steptronic</option>
                     </TextField>
                     {touched.transmission && errors.transmission && (
                       <div className={classes.inputError}>
                         {errors.transmission}
+                      </div>
+                    )}
+                  </div>
+                  <div className={classes.inputMargin}>
+                    <TextField
+                      name="category"
+                      error={touched.category && errors.category}
+                      placeholder="choose a category"
+                      label="category"
+                      select
+                      SelectProps={{ native: true }}
+                      size="small"
+                      fullWidth
+                      variant="outlined"
+                      onChange={handleChange}
+                      value={values.category}
+                    >
+                      {mappedCategories}
+                    </TextField>
+                    {touched.category && errors.category && (
+                      <div className={classes.inputError}>
+                        {errors.category}
                       </div>
                     )}
                   </div>
@@ -374,9 +376,9 @@ export function CarForm({ edit = false, car = {} }) {
                   sm={12}
                   md={12}
                   item
-                  style={{ padding: "0 1rem" }}
+                  style={{ padding: '0 1rem' }}
                 >
-                  <div style={{ minHeight: "70px" }}>
+                  <div style={{ minHeight: '70px' }}>
                     <TextField
                       name="description"
                       error={touched.description && errors.description}
@@ -397,12 +399,12 @@ export function CarForm({ edit = false, car = {} }) {
                   </div>
                 </Grid>
                 <div className={classes.buttonDiv}>
-                  <Link href="/"><Button type="button" variant="outlined" color="secondary">Back to main</Button></Link>
-                  <Button
-                    type="submit"
-                    variant="contained"
-                    color="primary"
-                  >
+                  <Link href="/">
+                    <Button type="button" variant="outlined" color="secondary">
+                      Back to main
+                    </Button>
+                  </Link>
+                  <Button type="submit" variant="contained" color="primary">
                     Create car
                   </Button>
                 </div>
@@ -412,6 +414,5 @@ export function CarForm({ edit = false, car = {} }) {
         </Paper>
       </form>
     </Paper>
-  )
   );
 }
