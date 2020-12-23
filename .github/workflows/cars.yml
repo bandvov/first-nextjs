@@ -28,7 +28,7 @@ jobs:
       run: |
         git config user.email "bandvov@gmail.com"
         git config user.name "bandvov"
-          
+    - run: npm install        
     - run: npm ci
     - run: npm build 
     - run: deploy
