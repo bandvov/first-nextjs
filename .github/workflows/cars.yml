@@ -16,7 +16,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [12.x]
+        node-version: [14.x]
 
     steps:
     - uses: actions/checkout@v2
@@ -30,7 +30,6 @@ jobs:
     - run: npm build 
     - name: Deploy
       uses: peaceiris/actions-gh-pages@v3
-      with:
-          deploy_key: ${{ secrets.DEPLOY_KEY }}
-          github_token: ${{ secrets.TOKEN }}
+      with:   
+          github_token: ${{ secrets.MY_GITHUB_TOKEN }}
           publish_dir: ./out
