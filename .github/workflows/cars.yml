@@ -28,8 +28,13 @@ jobs:
     - run: npm install        
     - run: npm ci
     - run: npm build 
-    - name: Deploy
-      uses: peaceiris/actions-gh-pages@v3
-      with:   
-          github_token: ${{ secrets.MY_GITHUB_TOKEN }}
-          publish_dir: ./out
+      
+    - name: Deploy to GitHub Pages
+      if: success()
+      uses: crazy-max/ghaction-github-pages@v2
+      with:
+        target_branch: gh-pages
+        build_dir: out
+      env:
+        GITHUB_TOKEN: ${{ secrets.MY_GITHUB_TOKEN }}
+
