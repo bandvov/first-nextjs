@@ -1,85 +1,90 @@
-import { Machine } from "xstate";
+import { Machine } from 'xstate';
 
 const defaultFilter = {
-  brand: "",
-  color: "",
-  minYear: "",
-  maxYear: "",
-  minPrice: "",
-  maxPrice: "",
-  searchText: "",
+  brand: '',
+  color: '',
+  minYear: '',
+  maxYear: '',
+  minPrice: '',
+  maxPrice: '',
+  searchText: '',
 };
 export const carMachine = Machine(
   {
-    id: "filter",
-    initial: "initial",
+    id: 'filter',
+    initial: 'initial',
     context: {
       filter: defaultFilter,
       open: false,
-      text: "",
+      text: '',
       handler: () => {},
       push: () => {},
-      id: "",
+      id: '',
       loading: true,
+      currentPage: 0,
     },
     states: {
       initial: {
         on: {
           SHOW: {
-            target: "show",
-            actions: ["showDialog"],
+            target: 'show',
+            actions: ['showDialog'],
           },
           ADD_BRAND: {
-            target: "initial",
-            actions: ["addBrandToStore"],
+            target: 'initial',
+            actions: ['addBrandToStore'],
           },
           ADD_COLOR: {
-            target: "initial",
-            actions: ["addColorToStore"],
+            target: 'initial',
+            actions: ['addColorToStore'],
           },
           ADD_MINYEAR: {
-            target: "initial",
-            actions: ["addMinYearToStore"],
+            target: 'initial',
+            actions: ['addMinYearToStore'],
           },
           ADD_MAXYEAR: {
-            target: "initial",
-            actions: ["addMaxYearToStore"],
+            target: 'initial',
+            actions: ['addMaxYearToStore'],
           },
           ADD_MINPRICE: {
-            target: "initial",
-            actions: ["addMinPriceToStore"],
+            target: 'initial',
+            actions: ['addMinPriceToStore'],
           },
           ADD_MAXPRICE: {
-            target: "initial",
-            actions: ["addMaxPriceToStore"],
+            target: 'initial',
+            actions: ['addMaxPriceToStore'],
           },
           ADD_SEARCH_TEXT: {
-            target: "initial",
-            actions: ["addSearchText"],
+            target: 'initial',
+            actions: ['addSearchText'],
           },
           CLEAR_FILTER: {
-            target: "initial",
-            actions: ["clearFilter"],
+            target: 'initial',
+            actions: ['clearFilter'],
           },
           SET_FILTERS: {
-            target: "initial",
-            actions: ["setAllFilters"],
+            target: 'initial',
+            actions: ['setAllFilters'],
           },
           SET_LOADING: {
-            target: "initial",
-            actions: ["setLoading"],
+            target: 'initial',
+            actions: ['setLoading'],
+          },
+          SET_CURRENT_PAGE: {
+            target: 'initial',
+            actions: ['setCurrentPage'],
           },
         },
       },
       show: {
         on: {
           DELETE: {
-            target: "initial",
-            actions: ["runHandler", "hideDialog", "clearData", "push"],
+            target: 'initial',
+            actions: ['runHandler', 'hideDialog', 'clearData', 'push'],
           },
           CANCEL: {
-            target: "initial",
-            actions: ["hideDialog", "clearData"],
+            target: 'initial',
+            actions: ['hideDialog', 'clearData'],
           },
         },
       },
@@ -100,18 +105,18 @@ export const carMachine = Machine(
         ctx.handler();
       },
       clearData: (ctx) => {
-        ctx.text = "";
+        ctx.text = '';
         ctx.handler = () => {};
       },
       clearFilter: (ctx) => {
         ctx.filter = {
-          brand: "",
-          color: "",
-          maxPrice: "",
-          maxYear: "",
-          minPrice: "",
-          minYear: "",
-          searchText: "",
+          brand: '',
+          color: '',
+          maxPrice: '',
+          maxYear: '',
+          minPrice: '',
+          minYear: '',
+          searchText: '',
         };
       },
       push: (ctx) => ctx.push(),
@@ -125,6 +130,7 @@ export const carMachine = Machine(
       addSearchText: (ctx, evt) => (ctx.filter.searchText = evt.searchText),
       setAllFilters: (ctx, evt) => (ctx.filter = evt.filter),
       setLoading: (ctx, evt) => (ctx.loading = evt.loading),
+      setCurrentPage: (ctx, evt) => (ctx.currentPage = evt.currentPage),
     },
-  },
+  }
 );
