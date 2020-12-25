@@ -181,6 +181,7 @@ export function CarForm({ edit = false, car = {} }) {
                 <Grid item style={{ padding: '0 1rem' }} xs={12} sm={12} md={6}>
                   <div className={classes.inputMargin}>
                     <TextField
+                      aria-label="enter car brand"
                       name="brand"
                       error={touched.brand && errors.brand}
                       placeholder="Brand"
@@ -337,7 +338,7 @@ export function CarForm({ edit = false, car = {} }) {
                       onChange={handleChange}
                       value={values.transmission}
                     >
-                      <option>{''}</option>
+                      <option />
                       <option>Automatic</option>
                       <option>Manual</option>
                       <option>Steptronic</option>

@@ -34,7 +34,7 @@ export const useStyles = makeStyles({
     padding: "0 1rem",
     alignSelf: "stretch",
     transition: "0.3s ease-in-out",
-    maxWidth: "20vw",
+    maxWidth: "30vw",
     "@media (max-width:1280px)": {
       maxWidth: "30vw",
     },
