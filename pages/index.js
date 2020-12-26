@@ -32,7 +32,7 @@ export default function Home({ cars = [] }) {
 }
 
 Home.getInitialProps = async () => {
-  const res = await getAllCars(0, 15);
+  const res = await getAllCars(0, 12);
 
   return {
     cars: res.cars,

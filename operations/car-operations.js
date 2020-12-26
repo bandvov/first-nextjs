@@ -142,7 +142,7 @@ export const getFilteredCars = async (filter, skip, limit) => {
     `,
     variables: { filter, skip, limit },
   });
-  console.log('res', res);
+
   return {
     cars: res.data.getFilteredCars.cars,
     count: res.data.getFilteredCars.count,

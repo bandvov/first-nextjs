@@ -7,22 +7,13 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import styles from '../styles/header.module.css';
 import { MainContext } from '../context/mainContext';
+import { helper } from '../utils';
 
 export default function Header() {
   const router = useRouter();
   const { state, send } = useContext(MainContext);
+  const { fetchData } = helper(state, send);
 
-  const fetchData = () => {
-    const { searchText } = state.context.filter;
-    send({
-      type: 'ADD_SEARCH_TEXT',
-      searchText,
-    });
-    router.push({
-      pathname: '/search',
-      query: state.context.filter,
-    });
-  };
   const submitHandler = (e) => {
     e.preventDefault();
     fetchData();
@@ -58,7 +49,11 @@ export default function Header() {
           id="searchfield"
           variant="outlined"
         />
-        <Button aria-label='search button' type="submit" onClick={submitHandler}>
+        <Button
+          aria-label="search button"
+          type="submit"
+          onClick={submitHandler}
+        >
           <SearchIcon />
         </Button>
       </Paper>

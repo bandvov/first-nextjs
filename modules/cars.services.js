@@ -28,25 +28,24 @@ class CarsServices {
   }
 
   async getFilteredCars({ filter, skip, limit }) {
-    console.log(filter, skip, limit);
     const filters = this.configureFilter(filter);
     const cars = await Cars.find(filters).skip(skip).limit(limit);
     const count = await Cars.find(filters).countDocuments();
-    
+
     return { cars, count };
   }
 
   configureFilter(data) {
     const filter = {};
     const {
-      brand,
-      model,
+      brand = '',
+      model = '',
       minYear = 1990,
       maxYear = 2022,
       minPrice = 0,
       maxPrice = 222222,
-      color,
-      searchText,
+      color = '',
+      searchText = '',
     } = data;
 
     if (brand) {

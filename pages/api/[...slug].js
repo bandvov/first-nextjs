@@ -32,6 +32,7 @@ const typeDefs = gql`
     minPrice: String
     maxPrice: String
     searchText: String
+    page: String
   }
 `;
 
