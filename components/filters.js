@@ -32,9 +32,9 @@ export default function Filters() {
         (!state.context.filter.searchText &&
           router.query.searchText &&
           router.query.searchText !== state.context.filter.searchText) ||
-        (!state.context.filter.currentPage &&
+        (!state.context.currentPage &&
           router.query.page &&
-          router.query.page !== state.context.filter.currentPage)
+          router.query.page !== state.context.currentPage)
       ) {
         send({
           type: 'SET_FILTERS',

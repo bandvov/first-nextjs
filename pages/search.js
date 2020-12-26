@@ -10,6 +10,7 @@ import { getFilteredCars } from '../operations/car-operations';
 import { MainContext } from '../context/mainContext';
 import CustomCircularProgress from '../components/circularProgress/circularProgress';
 import { helper } from '../utils';
+import { carsPerPage } from '../configs';
 
 export default function Search({ cars = [], count }) {
   const { state, send } = useContext(MainContext);
@@ -38,7 +39,7 @@ export default function Search({ cars = [], count }) {
       <Pagination
         style={{ marginTop: '1rem' }}
         color="primary"
-        count={Math.round(count / 9)}
+        count={Math.round(count / carsPerPage)}
         page={+state.context.currentPage}
         showFirstButton
         showLastButton
@@ -50,7 +51,11 @@ export default function Search({ cars = [], count }) {
 
 Search.getInitialProps = async (ctx) => {
   const { page } = ctx.query;
-  const { cars, count } = await getFilteredCars(ctx.query, (page - 1) * 9, 9);
+  const { cars, count } = await getFilteredCars(
+    ctx.query,
+    (page - 1) * carsPerPage,
+    carsPerPage
+  );
 
   return {
     cars,

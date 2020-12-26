@@ -296,6 +296,7 @@ export function CarForm({ edit = false, car = {} }) {
                       onChange={handleChange}
                       value={values.colorSimpleName}
                     >
+                      <option />
                       {mappedColors}
                     </TextField>
                     {touched.colorSimpleName && errors.colorSimpleName && (
@@ -318,6 +319,7 @@ export function CarForm({ edit = false, car = {} }) {
                       onChange={handleChange}
                       value={values.year}
                     >
+                      <option />
                       {mappedYears}
                     </TextField>
                     {touched.year && errors.year && (
@@ -363,6 +365,7 @@ export function CarForm({ edit = false, car = {} }) {
                       onChange={handleChange}
                       value={values.category}
                     >
+                      <option />
                       {mappedCategories}
                     </TextField>
                     {touched.category && errors.category && (

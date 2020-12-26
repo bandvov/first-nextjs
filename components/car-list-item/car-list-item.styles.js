@@ -14,9 +14,6 @@ export const useStyles = makeStyles((theme) => ({
       height: '12vw',
     },
     '@media (max-width:1440px)': {
-      height: '14vw',
-    },
-    '@media (max-width:1280px)': {
       height: '16vw',
     },
     '@media (max-width:1024px)': {
@@ -26,6 +23,7 @@ export const useStyles = makeStyles((theme) => ({
   imageContainer: {
     alignSelf: 'center',
     justifyContent: 'center',
+    height: '100%',
     '@media (max-width:959px)': {
       height: '30vw',
     },
@@ -36,10 +34,10 @@ export const useStyles = makeStyles((theme) => ({
   image: {
     height: '100%',
     width: '100%',
-    padding: '0 0 0 4px',
+    padding: '8px 0 8px 8px',
     '@media (max-width:959px)': {
       height: '30vw',
-      padding: '0',
+      padding: 0,
     },
     '@media (max-width:500px)': {
       height: '60vw',
@@ -50,7 +48,7 @@ export const useStyles = makeStyles((theme) => ({
   },
   textContainer: {
     height: '100%',
-    padding: '0 8px 8px',
+    padding: '8px',
     '@media (max-width:959px)': {
       height: 'auto',
     },

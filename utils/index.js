@@ -41,9 +41,8 @@ export const helper = (state = {}, send) => {
       type: `ADD_${filter.toUpperCase()}`,
       [filter]: e.target.value,
     });
-    fetchData();
-
     send({ type: 'SET_CURRENT_PAGE', currentPage: 1 });
+    fetchData();
   };
   return {
     changeHandler,
