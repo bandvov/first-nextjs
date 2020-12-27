@@ -31,9 +31,7 @@ jobs:
 
     - name: Build my App  
       run: npm build
-    - name: Export App
-      run: npm run export 
-    
+
     - name: Deploy my App    
       uses: crazy-max/ghaction-github-pages@v2
       with:
