@@ -30,9 +30,13 @@ jobs:
       run: npm ci
 
     - name: Build my App  
-    - run: npm build     
-    - run: touch ./out/.nojekyll      
-    - uses: crazy-max/ghaction-github-pages@v2
+      run: npm build 
+    
+    - name: Add .nojekyll
+      run: touch ./out/.nojekyll 
+       
+    - name: Build my App    
+      uses: crazy-max/ghaction-github-pages@v2
       with:
           target_branch: gh-pages
           build_dir: out
