@@ -30,12 +30,10 @@ jobs:
       run: npm ci
 
     - name: Build my App  
-    -  run: npm build
-    -  run: npm export 
+      run: npm build
+    - name: Export App
+      run: npm export 
     
-    - name: Add .nojekyll
-      run: touch ./out/.nojekyll 
-       
     - name: Build my App    
       uses: crazy-max/ghaction-github-pages@v2
       with:
