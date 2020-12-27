@@ -5,9 +5,9 @@ name: Node.js CI
 
 on:
   push:
-    branches: [ main ]
+    branches: [ master ]
   pull_request:
-    branches: [ main ]
+    branches: [ master ]
 
 jobs:
   build:
@@ -24,17 +24,23 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
-
-    - run: npm install        
-    - run: npm ci
-    - run: npm build 
       
-    - name: Deploy to GitHub Pages
-      if: success()
-      uses: crazy-max/ghaction-github-pages@v2
-      with:
-        target_branch: gh-pages
-        build_dir: out
-      env:
-        GITHUB_TOKEN: ${{ secrets.MY_GITHUB_TOKEN }}
 
+    - name: Installing my packages
+      run: npm ci
+
+    - name: Build my App  
+      run: npm run build
+      env:
+        NEXT_PUBLIC_BASE_PATH: /first-nextjs
+    - run: npm run export
+      env:
+        NEXT_PUBLIC_BASE_PATH: /first-nextjs
+    - run: touch ./out/.nojekyll
+    
+    - name: Deploy 🚀
+      uses: JamesIves/github-pages-deploy-action@3.5.9
+      with:
+        GITHUB_TOKEN: ${{ secrets.MY_GITHUB_TOKEN }}
+        BRANCH: gh-pages # The branch the action should deploy to.
+        FOLDER: out # The folder the action should deploy.
