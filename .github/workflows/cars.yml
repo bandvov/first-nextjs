@@ -31,7 +31,7 @@ jobs:
       run: npm ci
 
     - name: Build my App  
-      run: npm run build
+      run: npm build
       env:
         NEXT_PUBLIC_BASE_PATH: /youtube-2020-august-github-pages-github-actions
     - run: touch ./out/.nojekyll
