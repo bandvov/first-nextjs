@@ -1,47 +1,43 @@
-import Button from "@material-ui/core/Button";
-import Paper from "@material-ui/core/Paper";
-import PropTypes from "prop-types";
-import { useContext, useEffect } from "react";
-import Router from "next/router";
-import Link from "next/link";
-import Typography from "@material-ui/core/Typography";
-import { useStyles } from "./car-details.styles";
-import { MainContext } from "../../context/mainContext";
-import { deleteCar } from "../../operations/car-operations";
-import CustomCircularProgress from "../circularProgress/circularProgress";
+import Button from '@material-ui/core/Button';
+import Paper from '@material-ui/core/Paper';
+import PropTypes from 'prop-types';
+import { useContext, useEffect } from 'react';
+import Router from 'next/router';
+import Link from 'next/link';
+import Typography from '@material-ui/core/Typography';
+import { useStyles } from './car-details.styles';
+import { MainContext } from '../../context/mainContext';
+import { deleteCar } from '../../operations/car-operations';
+import CustomCircularProgress from '../circularProgress/circularProgress';
 
 export default function CarDetails({ car }) {
-  const { photo, ...carDetails } = car;
+  const { photo, _id, ...carDetails } = car;
   const classes = useStyles();
   const { state, send } = useContext(MainContext);
 
   useEffect(() => {
-    send({ type: "SET_LOADING", loading: false });
+    send({ type: 'SET_LOADING', loading: false });
   }, [car]);
 
   const deleteHandler = () => {
     send({
-      type: "SHOW",
-      text: "Are you sure you want to delete the car?",
-      handler: () => deleteCar(car._id),
-      push: () => Router.push("/"),
+      type: 'SHOW',
+      text: 'Are you sure you want to delete the car?',
+      handler: () => deleteCar(_id),
+      push: () => Router.push('/'),
     });
   };
   const carEntries = Object.entries(carDetails);
   const mappedCarDetails = carEntries.map((detail) => (
     <li key={detail}>
       <Typography gutterBottom variant="subtitle1">
-        <b>
-          {detail[0]}
-          :
-          {" "}
-        </b>
+        <b>{detail[0]}: </b>
         {detail[1]}
       </Typography>
     </li>
   ));
 
-  return (state.context.loading ? (
+  return state.context.loading ? (
     <CustomCircularProgress />
   ) : (
     <Paper elevation={10} className={classes.root}>
@@ -55,22 +51,23 @@ export default function CarDetails({ car }) {
       <Typography component="div" className={classes.text}>
         <Typography>{mappedCarDetails}</Typography>
         <Typography className={classes.deleteButton}>
-          <Link href={`/car/edit/${carDetails._id}`}>
-            <Button variant="outlined">edit</Button>
+          <Link href={`/car/edit/${_id}`}>
+            <Button aria-label='edit car' variant="outlined">edit</Button>
           </Link>
-          <Button type="button" onClick={deleteHandler} variant="contained">
+          <Button aria-label='delete car' type="button" onClick={deleteHandler} variant="contained">
             delete
           </Button>
         </Typography>
       </Typography>
     </Paper>
-  ));
+  );
 }
 
 CarDetails.propTypes = {
   car: PropTypes.shape({
     _id: PropTypes.string.isRequired,
     brand: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
     model: PropTypes.string.isRequired,
     year: PropTypes.number.isRequired,
     price: PropTypes.number.isRequired,

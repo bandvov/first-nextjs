@@ -354,13 +354,13 @@
     {
       "transmission": "Manual",
       "brand": "Ford",
-      "model": "S-MAX 7-Place.",
+      "model": "S-MAX 7-Place",
       "year": 2011,
       "price": 11800,
       "engine": "diesel",
       "mileage": 195000,
       "color": "Grey metallic",
-
+      "photo": "https://mediacloud.carbuyer.co.uk/image/private/s--s9XbZ4HZ--/v1579626810/carbuyer/ford-s-max-001.jpg",
       "category": "Wagon",
       "description": "Air conditioning, Cruise control, Radio / CD, Electric. window lifters, Central locking, On board computer Stability control Service manual, Engine heater, Internal socket, Tow bar"
     },

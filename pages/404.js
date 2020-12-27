@@ -1,10 +1,11 @@
-import Link from "next/link";
+import MainLayout from '../components/main-layout';
 
 export default function Error() {
   return (
-    <>
-      <h1>Car not found</h1>
-      <Link href="/"><span>Go to main</span></Link>
-    </>
+    <MainLayout>
+      <h1>404</h1>
+      <h2>Page not found :(</h2>
+      <h4>Ooooups! Looks like you got lost.</h4>
+    </MainLayout>
   );
 }

@@ -1,6 +1,7 @@
 import { Card } from '@material-ui/core';
 import PropTypes from 'prop-types';
 import { useContext, useEffect } from 'react';
+import Pagination from '@material-ui/lab/Pagination';
 import Filters from '../components/filters';
 import { CarListItem } from '../components/car-list-item/car-list-item';
 import MainLayout from '../components/main-layout';
@@ -8,14 +9,22 @@ import styles from '../styles/Home.module.css';
 import { getFilteredCars } from '../operations/car-operations';
 import { MainContext } from '../context/mainContext';
 import CustomCircularProgress from '../components/circularProgress/circularProgress';
+import { helper } from '../utils';
+import { carsPerPage } from '../configs';
 
-export default function Search({ cars = [] }) {
+export default function Search({ cars = [], count }) {
   const { state, send } = useContext(MainContext);
+
+  const { fetchData } = helper(state, send);
 
   useEffect(() => {
     send({ type: 'SET_LOADING', loading: false });
   }, [cars]);
-  
+
+  const setPageHandler = (e, value) => {
+    send({ type: 'SET_CURRENT_PAGE', currentPage: value });
+    fetchData();
+  };
   const mapped = cars.map((car) => <CarListItem key={car._id} {...car} />);
 
   return (
@@ -26,14 +35,31 @@ export default function Search({ cars = [] }) {
       ) : (
         cars && <Card className={styles.cars}>{mapped}</Card>
       )}
+
+      <Pagination
+        style={{ marginTop: '1rem' }}
+        color="primary"
+        count={Math.round(count / carsPerPage)}
+        page={+state.context.currentPage}
+        showFirstButton
+        showLastButton
+        onChange={setPageHandler}
+      />
     </MainLayout>
   );
 }
 
 Search.getInitialProps = async (ctx) => {
-  const cars = await getFilteredCars(ctx.query);
+  const { page } = ctx.query;
+  const { cars, count } = await getFilteredCars(
+    ctx.query,
+    (page - 1) * carsPerPage,
+    carsPerPage
+  );
+
   return {
     cars,
+    count,
   };
 };
 
