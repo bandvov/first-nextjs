@@ -26,19 +26,15 @@ jobs:
         node-version: ${{ matrix.node-version }}
       
 
-    - name: Installing my packages
-  
+    - name: Installing my packages  
       run: npm ci
 
     - name: Build my App  
-      run: npm build
-      env:
-        NEXT_PUBLIC_BASE_PATH: /youtube-2020-august-github-pages-github-actions
-    - run: touch ./out/.nojekyll
-    
-    - name: Deploy 🚀
-      uses: JamesIves/github-pages-deploy-action@3.5.9
+    - run: npm build     
+    - run: touch ./out/.nojekyll      
+    - uses: crazy-max/ghaction-github-pages@v2
       with:
-        GITHUB_TOKEN: ${{ secrets.MY_GITHUB_TOKEN }}
-        BRANCH: gh-pages # The branch the action should deploy to.
-        FOLDER: out # The folder the action should deploy.
+          target_branch: gh-pages
+          build_dir: out
+      env:
+          GITHUB_TOKEN: ${{ secrets.MY_GITHUB_TOKEN }}
