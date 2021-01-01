@@ -1,7 +1,6 @@
-const isProd = process.env.NODE_ENV === 'production';
-
+const isProd = process.env.NODE_ENV === 'development';
 module.exports = {
-  basePath: isProd ? '/first-nextjs' : '',
+  basePath: isProd ? '' : '/first-nextjs',
   generateBuildId: async () => '001',
   webpack: (config, { buildId, dev, isServer, defaultLoaders, webpack }) => {
     config.plugins.push(new webpack.IgnorePlugin(/\/__tests__\//));
