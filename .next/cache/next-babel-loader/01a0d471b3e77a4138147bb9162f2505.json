@@ -1,0 +1,1 @@
+{"ast":null,"code":"export var carRegExp = {\n  onlyPositiveDigits: /^\\d+$/\n};","map":null,"metadata":{},"sourceType":"module"}

@@ -1,0 +1,1 @@
+{"ast":null,"code":"import ApolloClient from \"apollo-boost\";\nimport { InMemoryCache } from \"apollo-cache-inmemory\";\nexport const client = new ApolloClient({\n  uri: \"http://localhost:3000/api/graphql\",\n  cache: new InMemoryCache({\n    addTypename: false\n  })\n});\n``;","map":null,"metadata":{},"sourceType":"module"}
