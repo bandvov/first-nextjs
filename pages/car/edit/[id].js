@@ -11,7 +11,7 @@ export default function Edit({ car }) {
   );
 }
 
-export async function getStaticProps(ctx) {
+export async function getServerSideProps(ctx) {
   const car = await getCarById(ctx.params.id);
   return {
     props: {
@@ -19,18 +19,7 @@ export async function getStaticProps(ctx) {
     },
   };
 }
-export async function getStaticPaths() {
-  const cars = await getCarsId();
 
-  return {
-    paths: cars.map((car) => ({
-      params: {
-        id: car._id,
-      },
-    })),
-    fallback: false,
-  };
-}
 
 Edit.propTypes = {
   car: PropTypes.shape({
