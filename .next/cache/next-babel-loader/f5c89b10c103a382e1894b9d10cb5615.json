@@ -1,0 +1,1 @@
+{"ast":null,"code":"import { jsx as _jsx } from \"react/jsx-runtime\";\nimport MainLayout from \"../../components/main-layout\";\nimport { CarForm } from \"../../components/car-form/car-form\";\nexport default function AddCar() {\n  return /*#__PURE__*/_jsx(MainLayout, {\n    children: /*#__PURE__*/_jsx(CarForm, {})\n  });\n}","map":null,"metadata":{},"sourceType":"module"}
