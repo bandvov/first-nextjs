@@ -1,5 +1,11 @@
+import cloudinary from 'cloudinary';
 import Cars from './cars.model';
 
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+});
 class CarsServices {
   async getAllCars({ skip, limit }) {
     const cars = await Cars.find().skip(skip).limit(limit).sort({ year: -1 });
@@ -15,7 +21,8 @@ class CarsServices {
     return car;
   }
 
-  async addCar({ car }) {
+  async addCar({ car, upload }) {
+    
     return await new Cars(car).save();
   }
 

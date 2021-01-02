@@ -1,5 +1,5 @@
-import { gql } from 'apollo-boost';
-import { client } from '../utils/client';
+import { gql } from "apollo-boost";
+import { client } from "../utils/client";
 
 export const getAllCars = async (skip, limit) => {
   const res = await client.query({
@@ -35,7 +35,7 @@ export const getCarsId = async () => {
         }
       }
     `,
-    fetchPolicy: 'no-cache',
+    fetchPolicy: "no-cache",
   });
   client.resetStore();
   return res.data.getAllCars.cars;
@@ -68,19 +68,21 @@ export const getCarById = async (id) => {
   return res.data.getCarById;
 };
 
-export const addCar = async (car) => {
+export const addCar = async ({ car, upload }) => {
   car.price = +car.price;
   car.year = +car.year;
   car.mileage = +car.mileage;
+
+  console.log("upload", upload);
   const res = await client.mutate({
     mutation: gql`
-      mutation($car: CarInput!) {
-        addCar(car: $car) {
+      mutation($car: CarInput!, $upload: Upload) {
+        addCar(car: $car, upload: $upload) {
           _id
         }
       }
     `,
-    variables: { car },
+    variables: { car, upload },
   });
 
   return res.data.addCar;

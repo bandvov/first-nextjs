@@ -19,7 +19,7 @@ const typeDefs = gql`
     getFilteredCars(filter: FilterInput, skip: Int, limit: Int): PaginatedCar
   }
   type Mutation {
-    addCar(car: CarInput!): Car
+    addCar(car: CarInput!, upload: Upload): Car
     updateCar(car: CarInput!, id: ID!): Car
     deleteCar(id: ID!): Car
   }
@@ -45,7 +45,11 @@ const resolvers = {
   },
 };
 
-const server = new ApolloServer({ typeDefs, resolvers });
+const server = new ApolloServer({
+  typeDefs,
+  resolvers,
+  context: ({ req }) => ({ req }),
+});
 
 const handler = server.createHandler({
   path: '/api/graphql',

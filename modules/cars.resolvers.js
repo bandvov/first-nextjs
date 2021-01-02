@@ -12,7 +12,9 @@ const carsQuery = {
   getFilteredCars: async (_, args) => await carsServices.getFilteredCars(args),
 };
 const carsMutation = {
-  addCar: async (parent, args) => await carsServices.addCar(args),
+  addCar: async (parent, args, ctx) => {
+    await carsServices.addCar(args);
+  },
   updateCar: async (_, args) => await carsServices.updateCar(args),
   deleteCar: async (_, args) => await carsServices.deleteCar(args),
 };

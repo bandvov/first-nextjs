@@ -4,7 +4,7 @@ import { Button, TextField } from '@material-ui/core';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { Image } from '@material-ui/icons';
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import Router from 'next/router';
 import Link from 'next/link';
 import { useStyles } from './car-form.styles';
@@ -13,6 +13,7 @@ import { carRegExp } from '../../configs/regexpSchemas';
 import { colors, years, categories } from '../../configs';
 import { MainContext } from '../../context/mainContext';
 import { addCar, updateCar } from '../../operations/car-operations';
+import ImageUploadContainer from '../image-upload-container';
 
 const {
   MIN_LENGTH_MESSAGE,
@@ -24,6 +25,7 @@ const {
 export function CarForm({ edit = false, car = {} }) {
   const classes = useStyles();
   const { send } = useContext(MainContext);
+  const [imageToShow, setImageToShow] = useState('');
 
   const addCarhandler = (car) => {
     send({
@@ -83,7 +85,6 @@ export function CarForm({ edit = false, car = {} }) {
     price: Yup.string()
       .matches(carRegExp.onlyPositiveDigits, PRICE_VALIDATION_ERROR)
       .required(VALIDATION_ERROR),
-    photo: Yup.string().required(VALIDATION_ERROR),
 
     description: Yup.string()
       .min(2, MIN_LENGTH_MESSAGE)
@@ -106,7 +107,14 @@ export function CarForm({ edit = false, car = {} }) {
       .required(VALIDATION_ERROR),
   });
 
-  const { values, handleChange, handleSubmit, errors, touched } = useFormik({
+  const {
+    values,
+    handleChange,
+    handleSubmit,
+    errors,
+    touched,
+    setFieldValue,
+  } = useFormik({
     validationSchema: formSchema,
     validateOnBlur: true,
     initialValues: {
@@ -122,15 +130,29 @@ export function CarForm({ edit = false, car = {} }) {
       externalColor: car.externalColor || '',
       colorSimpleName: car.colorSimpleName || '',
       category: car.category || '',
+      upload: {},
     },
     onSubmit: (data) => {
+      const { upload, ...car } = data;
       if (edit) {
-        updateCarhandler({ id: car._id, car: data });
+        updateCarhandler({ id: car._id, car });
       }
-      addCarhandler(data);
+      addCarhandler({ car, upload });
     },
   });
 
+  const handleImageLoad = (evt) => {
+    if (evt.target.files && evt.target.files[0]) {
+      const reader = new FileReader();
+      reader.readAsDataURL(evt.target.files[0]);
+      reader.onload = (e) => {
+        setImageToShow(e.target.result);
+      };
+      setFieldValue('upload', evt.target.files[0]);
+    }
+  };
+
+  console.log(values);
   return (
     <Paper elevation={10}>
       <form onSubmit={handleSubmit}>
@@ -148,11 +170,11 @@ export function CarForm({ edit = false, car = {} }) {
                 minHeight: '10rem',
               }}
             >
-              {values.photo ? (
+              {imageToShow || values.photo ? (
                 <img
                   alt="car"
                   style={{ maxWidth: '100%', height: 'auto' }}
-                  src={values.photo}
+                  src={imageToShow || values.photo}
                 />
               ) : (
                 <Image style={{ width: '100%', height: '100%' }} />
@@ -162,19 +184,12 @@ export function CarForm({ edit = false, car = {} }) {
               <Grid container md={12} style={{ padding: '1rem' }}>
                 <Grid sm={12} md={12} style={{ padding: '1rem 1rem 0' }}>
                   <div className={classes.inputMargin}>
-                    <TextField
-                      error={touched.photo && errors.photo}
-                      name="photo"
-                      label="Photo"
-                      placeholder="Photo"
-                      size="small"
-                      fullWidth
-                      value={values.photo}
-                      variant="outlined"
-                      onChange={handleChange}
+                    <ImageUploadContainer
+                      handler={handleImageLoad}
+                      buttonLabel="Upload photo"
                     />
-                    {touched.photo && errors.photo && (
-                      <div className={classes.inputError}>{errors.photo}</div>
+                    {touched.upload && errors.upload && (
+                      <div className={classes.inputError}>{errors.upload}</div>
                     )}
                   </div>
                 </Grid>
