@@ -17,6 +17,7 @@ export async function getStaticProps(ctx) {
     props: {
       car,
     },
+    
   };
 }
 export async function getStaticPaths() {
