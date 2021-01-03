@@ -48,7 +48,6 @@ const resolvers = {
 const server = new ApolloServer({
   typeDefs,
   resolvers,
-  context: ({ req }) => ({ req }),
 });
 
 const handler = server.createHandler({

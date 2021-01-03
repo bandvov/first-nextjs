@@ -130,14 +130,15 @@ export function CarForm({ edit = false, car = {} }) {
       externalColor: car.externalColor || '',
       colorSimpleName: car.colorSimpleName || '',
       category: car.category || '',
-      upload: {},
+      upload: '',
     },
     onSubmit: (data) => {
       const { upload, ...car } = data;
+
       if (edit) {
         updateCarhandler({ id: car._id, car });
       }
-      addCarhandler({ car, upload });
+      addCarhandler({ car, upload: imageToShow });
     },
   });
 
@@ -152,7 +153,6 @@ export function CarForm({ edit = false, car = {} }) {
     }
   };
 
-  console.log(values);
   return (
     <Paper elevation={10}>
       <form onSubmit={handleSubmit}>

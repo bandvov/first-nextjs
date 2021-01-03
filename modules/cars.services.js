@@ -21,9 +21,16 @@ class CarsServices {
     return car;
   }
 
-  async addCar({ car, upload }) {
-    
-    return await new Cars(car).save();
+  addCar({ car, upload }) {
+    cloudinary.uploader.unsigned_upload(
+      upload,
+      'cars_photo_upload',
+      async (result) => {
+        const { url } = result;
+        car.photo = url;
+        return await new Cars(car).save();
+      }
+    );
   }
 
   updateCar({ id, car }) {
