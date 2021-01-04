@@ -1,7 +1,7 @@
 import cloudinary from 'cloudinary';
 import Cars from './cars.model';
 
-cloudinary.config({
+cloudinary.v2.config({
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
   api_key: process.env.CLOUDINARY_API_KEY,
   api_secret: process.env.CLOUDINARY_API_SECRET,
@@ -21,16 +21,17 @@ class CarsServices {
     return car;
   }
 
-  addCar({ car, upload }) {
-    cloudinary.uploader.unsigned_upload(
-      upload,
-      'cars_photo_upload',
-      async (result) => {
+  async addCar({ car, upload }) {
+    await cloudinary.v2.uploader
+      .upload(upload, {
+        upload_preset: 'ml_default',
+        use_filename: true,
+      })
+      .then(async (result) => {
         const { url } = result;
         car.photo = url;
         return await new Cars(car).save();
-      }
-    );
+      });
   }
 
   updateCar({ id, car }) {

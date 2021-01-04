@@ -133,12 +133,12 @@ export function CarForm({ edit = false, car = {} }) {
       upload: '',
     },
     onSubmit: (data) => {
-      const { upload, ...car } = data;
+      const { upload, ...rest } = data;
 
       if (edit) {
-        updateCarhandler({ id: car._id, car });
+        updateCarhandler({ id: car._id, car: rest });
       }
-      addCarhandler({ car, upload: imageToShow });
+      addCarhandler({ car: rest, upload: imageToShow });
     },
   });
 
