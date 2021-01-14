@@ -28,8 +28,9 @@ class CarsServices {
         use_filename: true,
       })
       .then(async (result) => {
-        const { url } = result;
+        const { url, public_id } = result;
         car.photo = url;
+        car.public_id = public_id;
         return await new Cars(car).save();
       });
   }
@@ -38,8 +39,10 @@ class CarsServices {
     return Cars.findByIdAndUpdate(id, { $set: car }, { new: true });
   }
 
-  deleteCar({ id }) {
-    return Cars.findByIdAndDelete(id);
+  async deleteCar({ id }) {
+    const car = await Cars.findByIdAndDelete(id);
+    await cloudinary.v2.uploader.destroy(car.public_id);
+    return car;
   }
 
   async getFilteredCars({ filter, skip, limit }) {

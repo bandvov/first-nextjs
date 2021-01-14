@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 
 const { Schema } = mongoose;
 
@@ -19,8 +19,9 @@ const cars = new Schema({
     type: String,
     default: Date.now(),
   },
+  public_id: String,
 });
 
 export default mongoose.models && mongoose.models.cars
   ? mongoose.models.cars
-  : mongoose.model("cars", cars, "cars");
+  : mongoose.model('cars', cars, 'cars');
