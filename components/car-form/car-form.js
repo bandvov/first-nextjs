@@ -5,7 +5,7 @@ import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { Image } from '@material-ui/icons';
 import { useContext, useState } from 'react';
-import Router from 'next/router';
+
 import Link from 'next/link';
 import { useStyles } from './car-form.styles';
 import { carValidationMessages } from '../../configs/validation';
@@ -32,7 +32,6 @@ export function CarForm({ edit = false, car = {} }) {
       type: 'SHOW',
       text: 'Are you sure you want to add the car?',
       handler: () => addCar(car),
-      push: () => Router.push('/'),
     });
   };
   const updateCarhandler = (data) => {
@@ -40,7 +39,6 @@ export function CarForm({ edit = false, car = {} }) {
       type: 'SHOW',
       text: 'Are you sure you want to update the car data?',
       handler: () => updateCar(data),
-      push: () => Router.push('/'),
     });
   };
 
@@ -107,14 +105,7 @@ export function CarForm({ edit = false, car = {} }) {
       .required(VALIDATION_ERROR),
   });
 
-  const {
-    values,
-    handleChange,
-    handleSubmit,
-    errors,
-    touched,
-    setFieldValue,
-  } = useFormik({
+  const { values, handleChange, handleSubmit, errors, touched } = useFormik({
     validationSchema: formSchema,
     validateOnBlur: true,
     initialValues: {
@@ -130,15 +121,18 @@ export function CarForm({ edit = false, car = {} }) {
       externalColor: car.externalColor || '',
       colorSimpleName: car.colorSimpleName || '',
       category: car.category || '',
-      upload: '',
     },
     onSubmit: (data) => {
-      const { upload, ...rest } = data;
-
       if (edit) {
-        updateCarhandler({ id: car._id, car: rest });
+        updateCarhandler({
+          id: car._id,
+          car: data,
+          upload: imageToShow,
+        });
+
+        return;
       }
-      addCarhandler({ car: rest, upload: imageToShow });
+      addCarhandler({ car: data, upload: imageToShow });
     },
   });
 
@@ -149,7 +143,6 @@ export function CarForm({ edit = false, car = {} }) {
       reader.onload = (e) => {
         setImageToShow(e.target.result);
       };
-      setFieldValue('upload', evt.target.files[0]);
     }
   };
 

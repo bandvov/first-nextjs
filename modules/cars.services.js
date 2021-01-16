@@ -35,7 +35,23 @@ class CarsServices {
       });
   }
 
-  updateCar({ id, car }) {
+  async updateCar({ id, car, upload }) {
+    const foundCar = await Cars.findById(id);
+    if (upload) {
+      await cloudinary.v2.uploader.destroy(foundCar.public_id);
+
+      return await cloudinary.v2.uploader
+        .upload(upload, {
+          upload_preset: 'ml_default',
+          use_filename: true,
+        })
+        .then(async (result) => {
+          const { url, public_id } = result;
+          car.photo = url;
+          car.public_id = public_id;
+          return await Cars.findByIdAndUpdate(id, { $set: car }, { new: true });
+        });
+    }
     return Cars.findByIdAndUpdate(id, { $set: car }, { new: true });
   }
 

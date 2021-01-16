@@ -20,7 +20,7 @@ const typeDefs = gql`
   }
   type Mutation {
     addCar(car: CarInput!, upload: Upload): Car
-    updateCar(car: CarInput!, id: ID!): Car
+    updateCar(car: CarInput!, id: ID!, upload: Upload): Car
     deleteCar(id: ID!): Car
   }
   input FilterInput {
