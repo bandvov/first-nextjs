@@ -13,7 +13,6 @@ const cars = new Schema({
   transmission: String,
   category: String,
   externalColor: String,
-  colorSimpleName: String,
   description: String,
   date: {
     type: String,

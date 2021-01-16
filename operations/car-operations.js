@@ -57,8 +57,7 @@ export const getCarById = async (id) => {
           transmission
           externalColor
           photo
-          engine
-          colorSimpleName
+          engine        
           description
         }
       }
@@ -121,7 +120,7 @@ export const deleteCar = async (id) => {
     `,
     variables: { id },
   });
-
+  Router.push('/');
   return res.data.deleteCar;
 };
 
@@ -144,6 +143,7 @@ export const getFilteredCars = async (filter, skip, limit) => {
       }
     `,
     variables: { filter, skip, limit },
+    fetchPolicy:'no-cache'
   });
 
   return {

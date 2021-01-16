@@ -39,7 +39,7 @@ export default function Search({ cars = [], count }) {
       <Pagination
         style={{ marginTop: '1rem' }}
         color="primary"
-        count={Math.round(count / carsPerPage)}
+        count={Math.ceil(count / carsPerPage)}
         page={+state.context.currentPage}
         showFirstButton
         showLastButton

@@ -8,7 +8,7 @@ cloudinary.v2.config({
 });
 class CarsServices {
   async getAllCars({ skip, limit }) {
-    const cars = await Cars.find().skip(skip).limit(limit).sort({ year: -1 });
+    const cars = await Cars.find().skip(skip).limit(limit).sort({ date: -1 });
     const count = await Cars.countDocuments();
     return { cars, count };
   }
@@ -107,7 +107,7 @@ class CarsServices {
     }
 
     if (color) {
-      filter.colorSimpleName = new RegExp(color, 'i');
+      filter.externalColor = new RegExp(color, 'i');
     }
     if (searchText) {
       filter.description = new RegExp(searchText, 'i');

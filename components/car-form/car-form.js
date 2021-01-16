@@ -94,11 +94,6 @@ export function CarForm({ edit = false, car = {} }) {
       .max(100, MAX_LENGTH_MESSAGE)
       .required(VALIDATION_ERROR),
 
-    colorSimpleName: Yup.string()
-      .min(2, MIN_LENGTH_MESSAGE)
-      .max(100, MAX_LENGTH_MESSAGE)
-      .required(VALIDATION_ERROR),
-
     category: Yup.string()
       .min(2, MIN_LENGTH_MESSAGE)
       .max(100, MAX_LENGTH_MESSAGE)
@@ -119,7 +114,6 @@ export function CarForm({ edit = false, car = {} }) {
       description: car.description || '',
       transmission: car.transmission || '',
       externalColor: car.externalColor || '',
-      colorSimpleName: car.colorSimpleName || '',
       category: car.category || '',
     },
     onSubmit: (data) => {
@@ -290,29 +284,6 @@ export function CarForm({ edit = false, car = {} }) {
                     )}
                   </div>
 
-                  <div className={classes.inputMargin}>
-                    <TextField
-                      name="colorSimpleName"
-                      error={touched.colorSimpleName && errors.colorSimpleName}
-                      placeholder="Simple color"
-                      select
-                      label="Simple color"
-                      SelectProps={{ native: true }}
-                      size="small"
-                      fullWidth
-                      variant="outlined"
-                      onChange={handleChange}
-                      value={values.colorSimpleName}
-                    >
-                      <option />
-                      {mappedColors}
-                    </TextField>
-                    {touched.colorSimpleName && errors.colorSimpleName && (
-                      <div className={classes.inputError}>
-                        {errors.colorSimpleName}
-                      </div>
-                    )}
-                  </div>
                   <div className={classes.inputMargin}>
                     <TextField
                       name="year"
