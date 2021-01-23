@@ -42,9 +42,6 @@ export function CarForm({ edit = false, car = {} }) {
     });
   };
 
-  const mappedColors = colors.map((color) => (
-    <option key={color}>{color}</option>
-  ));
   const mappedYears = years.map((year) => <option key={year}>{year}</option>);
 
   const mappedCategories = categories.map((category) => (
@@ -92,7 +89,7 @@ export function CarForm({ edit = false, car = {} }) {
     externalColor: Yup.string()
       .min(2, MIN_LENGTH_MESSAGE)
       .max(100, MAX_LENGTH_MESSAGE)
-      .matches(/^[a-zA-Z]+$/,'Only letters')
+      .matches(/^[a-zA-Z\s]+$/,'Only letters')
       .required(VALIDATION_ERROR),
 
     category: Yup.string()

@@ -68,7 +68,7 @@ export const getCarById = async (id) => {
     client.resetStore();
     return res.data.getCarById;
   } catch (e) {
-    return { error: e.message.replace('GraphQL error:','') };
+    return { error: e.message.replace('GraphQL error:', '') };
   }
 };
 
@@ -92,40 +92,53 @@ export const addCar = async ({ car, upload }) => {
 };
 
 export const updateCar = async ({ id, car, upload }) => {
-  car.price = +car.price;
-  car.year = +car.year;
-  car.mileage = +car.mileage;
+  try {
+    car.price = +car.price;
+    car.year = +car.year;
+    car.mileage = +car.mileage;
 
-  const res = await client.mutate({
-    mutation: gql`
-      mutation($id: ID!, $car: CarInput!, $upload: Upload) {
-        updateCar(id: $id, car: $car, upload: $upload) {
-          _id
+    const res = await client.mutate({
+      mutation: gql`
+        mutation($id: ID!, $car: CarInput!, $upload: Upload) {
+          updateCar(id: $id, car: $car, upload: $upload) {
+            _id
+          }
         }
-      }
-    `,
-    variables: {
-      id,
-      car,
-      upload,
-    },
-  });
-  Router.push('/');
-  return res.data.updateCar;
+      `,
+      variables: {
+        id,
+        car,
+        upload,
+      },
+    });
+    Router.push('/');
+    return res.data.updateCar;
+  } catch (e) {
+    return {
+      error: e.message,
+    };
+  }
 };
+
 export const deleteCar = async (id) => {
-  const res = await client.mutate({
-    mutation: gql`
-      mutation($id: ID!) {
-        deleteCar(id: $id) {
-          _id
+  try {
+    const res = await client.mutate({
+      mutation: gql`
+        mutation($id: ID!) {
+          deleteCar(id: $id) {
+            _id
+          }
         }
-      }
-    `,
-    variables: { id },
-  });
-  Router.push('/');
-  return res.data.deleteCar;
+      `,
+      variables: { id },
+    });
+    Router.push('/');
+    return res.data.deleteCar;
+  } catch (e) {
+    return {
+      error: e.message,
+    };
+  }
 };
 
 export const getFilteredCars = async (filter, skip, limit) => {

@@ -44,6 +44,9 @@ class CarsServices {
       throw new Error('Not valid ID format');
     }
     const foundCar = await Cars.findById(id);
+    if (!foundCar) {
+      throw new Error('Car not found');
+    }
     if (upload) {
       await cloudinary.v2.uploader.destroy(foundCar.public_id);
 
@@ -67,6 +70,9 @@ class CarsServices {
       throw new Error('Not valid ID format');
     }
     const car = await Cars.findByIdAndDelete(id);
+    if (!car) {
+      throw new Error('Car not found');
+    }
     await cloudinary.v2.uploader.destroy(car.public_id);
     return car;
   }

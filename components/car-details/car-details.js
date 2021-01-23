@@ -12,7 +12,7 @@ import { MainContext } from '../../context/mainContext';
 import { deleteCar } from '../../operations/car-operations';
 import CustomCircularProgress from '../circularProgress/circularProgress';
 
-export default function CarDetails({ car }) {
+export default function CarDetails({ car, showError }) {
   const classes = useStyles();
   const { state, send } = useContext(MainContext);
 
@@ -26,6 +26,7 @@ export default function CarDetails({ car }) {
       text: 'Are you sure you want to delete the car?',
       handler: () => deleteCar(car._id),
     });
+    showError();
   };
 
   const date = new Date(+car.date).toLocaleDateString();

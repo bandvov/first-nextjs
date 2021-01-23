@@ -14,11 +14,9 @@ export const useStyles = makeStyles(() => ({
       height: '12vw',
     },
     '@media (max-width:1440px)': {
-      height: '12vw',
-    },
-    '@media (max-width:1300px)': {
       height: '14vw',
     },
+
     '@media (max-width:1280px)': {
       height: '16vw',
     },
