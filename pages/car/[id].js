@@ -1,12 +1,13 @@
 import PropTypes from 'prop-types';
 import { useContext, useEffect } from 'react';
+import Router from 'next/router';
 import MainLayout from '../../components/main-layout';
 import CarDetails from '../../components/car-details/car-details';
-import { getCarById, getCarsId } from '../../operations/car-operations';
+import { getCarById } from '../../operations/car-operations';
 import { MainContext } from '../../context/mainContext';
 import CustomCircularProgress from '../../components/circularProgress/circularProgress';
 
-export default function OneCar({ car = {} }) {
+export default function OneCar({ car = {}, error = '' }) {
   const { state, send } = useContext(MainContext);
 
   useEffect(() => {
@@ -17,6 +18,8 @@ export default function OneCar({ car = {} }) {
     <MainLayout>
       {state.context.loading ? (
         <CustomCircularProgress ress />
+      ) : error ? (
+        <h1>{error}</h1>
       ) : (
         <CarDetails car={car} />
       )}
@@ -25,12 +28,20 @@ export default function OneCar({ car = {} }) {
 }
 export async function getServerSideProps(ctx) {
   const car = await getCarById(ctx.params.id);
-
-  return {
-    props: {
-      car,
-    },
-  };
+  if (car.error) {
+    return {
+      props: {
+        error: car.error,
+      },
+    };
+  }
+  if (car) {
+    return {
+      props: {
+        car,
+      },
+    };
+  }
 }
 
 OneCar.propTypes = {
@@ -44,4 +55,5 @@ OneCar.propTypes = {
     externalColor: PropTypes.string.isRequired,
     photo: PropTypes.string.isRequired,
   }).isRequired,
+  error: PropTypes.string,
 };

@@ -42,37 +42,41 @@ export const getCarsId = async () => {
   return res.data.getAllCars.cars;
 };
 export const getCarById = async (id) => {
-  const res = await client.query({
-    query: gql`
-      query($id: ID!) {
-        getCarById(id: $id) {
-          _id
-          brand
-          model
-          category
-          date
-          price
-          year
-          mileage
-          transmission
-          externalColor
-          photo
-          engine        
-          description
+  try {
+    const res = await client.query({
+      query: gql`
+        query($id: ID!) {
+          getCarById(id: $id) {
+            _id
+            brand
+            model
+            category
+            date
+            price
+            year
+            mileage
+            transmission
+            externalColor
+            photo
+            engine
+            description
+          }
         }
-      }
-    `,
-    variables: { id },
-  });
-  client.resetStore();
-  return res.data.getCarById;
+      `,
+      variables: { id },
+    });
+    client.resetStore();
+    return res.data.getCarById;
+  } catch (e) {
+    return { error: e.message.replace('GraphQL error:','') };
+  }
 };
 
 export const addCar = async ({ car, upload }) => {
   car.price = +car.price;
   car.year = +car.year;
   car.mileage = +car.mileage;
-  console.log('car operation', upload);
+
   const res = await client.mutate({
     mutation: gql`
       mutation($car: CarInput!, $upload: Upload) {
@@ -143,7 +147,7 @@ export const getFilteredCars = async (filter, skip, limit) => {
       }
     `,
     variables: { filter, skip, limit },
-    fetchPolicy:'no-cache'
+    fetchPolicy: 'no-cache',
   });
 
   return {

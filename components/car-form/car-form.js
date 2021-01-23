@@ -92,6 +92,7 @@ export function CarForm({ edit = false, car = {} }) {
     externalColor: Yup.string()
       .min(2, MIN_LENGTH_MESSAGE)
       .max(100, MAX_LENGTH_MESSAGE)
+      .matches(/^[a-zA-Z]+$/,'Only letters')
       .required(VALIDATION_ERROR),
 
     category: Yup.string()

@@ -1,4 +1,5 @@
 import cloudinary from 'cloudinary';
+import mongoose from 'mongoose';
 import Cars from './cars.model';
 
 cloudinary.v2.config({
@@ -14,9 +15,12 @@ class CarsServices {
   }
 
   async getCarById({ id }) {
+    if (!mongoose.isValidObjectId(id)) {
+      throw new Error('Not valid ID format');
+    }
     const car = await Cars.findById(id);
     if (!car) {
-      throw new Error('car not found');
+      throw new Error('Car not found');
     }
     return car;
   }
@@ -36,6 +40,9 @@ class CarsServices {
   }
 
   async updateCar({ id, car, upload }) {
+    if (!mongoose.isValidObjectId(id)) {
+      throw new Error('Not valid ID format');
+    }
     const foundCar = await Cars.findById(id);
     if (upload) {
       await cloudinary.v2.uploader.destroy(foundCar.public_id);
@@ -56,6 +63,9 @@ class CarsServices {
   }
 
   async deleteCar({ id }) {
+    if (!mongoose.isValidObjectId(id)) {
+      throw new Error('Not valid ID format');
+    }
     const car = await Cars.findByIdAndDelete(id);
     await cloudinary.v2.uploader.destroy(car.public_id);
     return car;
