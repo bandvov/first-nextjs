@@ -1,8 +1,14 @@
+import cloudinary from 'cloudinary';
 import Cars from './cars.model';
 
+cloudinary.v2.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+});
 class CarsServices {
   async getAllCars({ skip, limit }) {
-    const cars = await Cars.find().skip(skip).limit(limit).sort({ year: -1 });
+    const cars = await Cars.find().skip(skip).limit(limit).sort({ date: -1 });
     const count = await Cars.countDocuments();
     return { cars, count };
   }
@@ -15,16 +21,44 @@ class CarsServices {
     return car;
   }
 
-  async addCar({ car }) {
-    return await new Cars(car).save();
+  async addCar({ car, upload }) {
+    await cloudinary.v2.uploader
+      .upload(upload, {
+        upload_preset: 'ml_default',
+        use_filename: true,
+      })
+      .then(async (result) => {
+        const { url, public_id } = result;
+        car.photo = url;
+        car.public_id = public_id;
+        return await new Cars(car).save();
+      });
   }
 
-  updateCar({ id, car }) {
+  async updateCar({ id, car, upload }) {
+    const foundCar = await Cars.findById(id);
+    if (upload) {
+      await cloudinary.v2.uploader.destroy(foundCar.public_id);
+
+      return await cloudinary.v2.uploader
+        .upload(upload, {
+          upload_preset: 'ml_default',
+          use_filename: true,
+        })
+        .then(async (result) => {
+          const { url, public_id } = result;
+          car.photo = url;
+          car.public_id = public_id;
+          return await Cars.findByIdAndUpdate(id, { $set: car }, { new: true });
+        });
+    }
     return Cars.findByIdAndUpdate(id, { $set: car }, { new: true });
   }
 
-  deleteCar({ id }) {
-    return Cars.findByIdAndDelete(id);
+  async deleteCar({ id }) {
+    const car = await Cars.findByIdAndDelete(id);
+    await cloudinary.v2.uploader.destroy(car.public_id);
+    return car;
   }
 
   async getFilteredCars({ filter, skip, limit }) {
@@ -73,7 +107,7 @@ class CarsServices {
     }
 
     if (color) {
-      filter.colorSimpleName = new RegExp(color, 'i');
+      filter.externalColor = new RegExp(color, 'i');
     }
     if (searchText) {
       filter.description = new RegExp(searchText, 'i');

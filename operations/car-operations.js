@@ -1,4 +1,5 @@
 import { gql } from 'apollo-boost';
+import Router from 'next/router';
 import { client } from '../utils/client';
 
 export const getAllCars = async (skip, limit) => {
@@ -56,45 +57,45 @@ export const getCarById = async (id) => {
           transmission
           externalColor
           photo
-          engine
-          colorSimpleName
+          engine        
           description
         }
       }
     `,
     variables: { id },
   });
-
+  client.resetStore();
   return res.data.getCarById;
 };
 
-export const addCar = async (car) => {
+export const addCar = async ({ car, upload }) => {
   car.price = +car.price;
   car.year = +car.year;
   car.mileage = +car.mileage;
+  console.log('car operation', upload);
   const res = await client.mutate({
     mutation: gql`
-      mutation($car: CarInput!) {
-        addCar(car: $car) {
+      mutation($car: CarInput!, $upload: Upload) {
+        addCar(car: $car, upload: $upload) {
           _id
         }
       }
     `,
-    variables: { car },
+    variables: { car, upload },
   });
-
+  Router.push('/');
   return res.data.addCar;
 };
 
-export const updateCar = async ({ id, car }) => {
+export const updateCar = async ({ id, car, upload }) => {
   car.price = +car.price;
   car.year = +car.year;
   car.mileage = +car.mileage;
 
   const res = await client.mutate({
     mutation: gql`
-      mutation($id: ID!, $car: CarInput!) {
-        updateCar(id: $id, car: $car) {
+      mutation($id: ID!, $car: CarInput!, $upload: Upload) {
+        updateCar(id: $id, car: $car, upload: $upload) {
           _id
         }
       }
@@ -102,9 +103,10 @@ export const updateCar = async ({ id, car }) => {
     variables: {
       id,
       car,
+      upload,
     },
   });
-
+  Router.push('/');
   return res.data.updateCar;
 };
 export const deleteCar = async (id) => {
@@ -118,7 +120,7 @@ export const deleteCar = async (id) => {
     `,
     variables: { id },
   });
-
+  Router.push('/');
   return res.data.deleteCar;
 };
 
@@ -141,6 +143,7 @@ export const getFilteredCars = async (filter, skip, limit) => {
       }
     `,
     variables: { filter, skip, limit },
+    fetchPolicy:'no-cache'
   });
 
   return {

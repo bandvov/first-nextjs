@@ -24,9 +24,11 @@
     "apollo-cache-inmemory": "^1.6.6",
     "apollo-client": "^2.6.10",
     "apollo-server-micro": "^2.19.0",
+    "cloudinary": "^1.23.0",
     "eslint-config-airbnb-base": "^14.2.1",
     "eslint-plugin-node": "^11.1.0",
     "formik": "^2.2.5",
+    "graphql-upload": "^11.0.0",
     "mongoose": "^5.10.15",
     "next": "10.0.1",
     "prop-types": "^15.7.2",
@@ -51,8 +53,6 @@
     ]
   },
   "devDependencies": {
-    "@typescript-eslint/eslint-plugin": "^4.8.2",
-    "@typescript-eslint/parser": "^4.8.2",
     "babel-eslint": "^10.1.0",
     "eslint": "^7.14.0",
     "eslint-config-airbnb": "^18.2.1",
