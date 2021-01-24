@@ -1,7 +1,7 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { Button } from '@material-ui/core';
-import { AttachFile } from '@material-ui/icons';
+import React from "react";
+import PropTypes from "prop-types";
+import { Button } from "@material-ui/core";
+import { AttachFile } from "@material-ui/icons";
 
 const ImageUploadContainer = ({ handler, multiple, buttonLabel }) => (
   <div>
@@ -10,7 +10,7 @@ const ImageUploadContainer = ({ handler, multiple, buttonLabel }) => (
         <AttachFile />
         {buttonLabel}
         <input
-          style={{ display: 'none' }}
+          style={{ display: "none" }}
           id="upload"
           name="upload"
           type="file"
@@ -31,7 +31,7 @@ ImageUploadContainer.propTypes = {
 
 ImageUploadContainer.defaultProps = {
   multiple: false,
-  buttonLabel: 'Upload',
+  buttonLabel: "Upload",
 };
 
 export default ImageUploadContainer;

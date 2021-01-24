@@ -1,7 +1,7 @@
-import { TextField } from '@material-ui/core';
-import { useContext } from 'react';
-import { MainContext } from '../../context/mainContext';
-import { helper } from '../../utils';
+import { TextField } from "@material-ui/core";
+import { useContext } from "react";
+import { MainContext } from "../../context/mainContext";
+import { helper } from "../../utils";
 
 export default function BrandFacet({ data, name }) {
   const { state, send } = useContext(MainContext);
@@ -16,7 +16,7 @@ export default function BrandFacet({ data, name }) {
 
   return (
     <TextField
-      style={{ width: '180px' }}
+      style={{ width: "180px" }}
       name={name}
       select
       SelectProps={{ native: true }}

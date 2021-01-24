@@ -1,5 +1,5 @@
-export const colors = ['White', 'Black', 'Red', 'Blue', 'Grey'];
-export const brands = ['Audi', 'BMW', 'Ford', 'Opel', 'Toyota', 'Volkswagen'];
+export const colors = ["White", "Black", "Red", "Blue", "Grey"];
+export const brands = ["Audi", "BMW", "Ford", "Opel", "Toyota", "Volkswagen"];
 export const prices = [
   1000,
   2000,
@@ -16,12 +16,12 @@ export const prices = [
   100000,
 ];
 export const categories = [
-  'Coupe',
-  'Convertible',
-  'Sedan',
-  'Hatchback',
-  'SUV',
-  'Wagon',
+  "Coupe",
+  "Convertible",
+  "Sedan",
+  "Hatchback",
+  "SUV",
+  "Wagon",
 ];
 export const carsPerPage = 12;
 export const years = [

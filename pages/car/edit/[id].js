@@ -43,5 +43,5 @@ Edit.propTypes = {
 };
 
 Edit.defaultProps = {
-  error: ''
-}
+  error: "",
+};

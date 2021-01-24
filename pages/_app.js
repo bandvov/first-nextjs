@@ -1,7 +1,7 @@
 import "../styles/globals.css";
 import PropTypes from "prop-types";
 import { useMachine } from "@xstate/react";
-
+import { ToastContainer, toast } from 'react-toastify';
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { MainContext } from "../context/mainContext";
@@ -23,9 +23,11 @@ function MyApp({
     <MainContext.Provider value={{
       state,
       send,
+      toast
     }}
     >
       <Component {...pageProps} />
+      <ToastContainer />
     </MainContext.Provider>
   );
 }

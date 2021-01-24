@@ -1,16 +1,16 @@
-import { Card } from '@material-ui/core';
-import PropTypes from 'prop-types';
-import { useContext, useEffect } from 'react';
-import Pagination from '@material-ui/lab/Pagination';
-import Filters from '../components/filters';
-import { CarListItem } from '../components/car-list-item/car-list-item';
-import MainLayout from '../components/main-layout';
-import styles from '../styles/Home.module.css';
-import { getFilteredCars } from '../operations/car-operations';
-import { MainContext } from '../context/mainContext';
-import CustomCircularProgress from '../components/circularProgress/circularProgress';
-import { helper } from '../utils';
-import { carsPerPage } from '../configs';
+import { Card } from "@material-ui/core";
+import PropTypes from "prop-types";
+import { useContext, useEffect } from "react";
+import Pagination from "@material-ui/lab/Pagination";
+import Filters from "../components/filters";
+import { CarListItem } from "../components/car-list-item/car-list-item";
+import MainLayout from "../components/main-layout";
+import styles from "../styles/Home.module.css";
+import { getFilteredCars } from "../operations/car-operations";
+import { MainContext } from "../context/mainContext";
+import CustomCircularProgress from "../components/circularProgress/circularProgress";
+import { helper } from "../utils";
+import { carsPerPage } from "../configs";
 
 export default function Search({ cars = [], count }) {
   const { state, send } = useContext(MainContext);
@@ -18,11 +18,11 @@ export default function Search({ cars = [], count }) {
   const { fetchData } = helper(state, send);
 
   useEffect(() => {
-    send({ type: 'SET_LOADING', loading: false });
+    send({ type: "SET_LOADING", loading: false });
   }, [cars]);
 
   const setPageHandler = (e, value) => {
-    send({ type: 'SET_CURRENT_PAGE', currentPage: value });
+    send({ type: "SET_CURRENT_PAGE", currentPage: value });
     fetchData();
   };
   const mapped = cars.map((car) => <CarListItem key={car._id} {...car} />);
@@ -37,7 +37,7 @@ export default function Search({ cars = [], count }) {
       )}
 
       <Pagination
-        style={{ marginTop: '1rem' }}
+        style={{ marginTop: "1rem" }}
         color="primary"
         count={Math.ceil(count / carsPerPage)}
         page={+state.context.currentPage}
@@ -54,7 +54,7 @@ Search.getInitialProps = async (ctx) => {
   const { cars, count } = await getFilteredCars(
     ctx.query,
     (page - 1) * carsPerPage,
-    carsPerPage
+    carsPerPage,
   );
 
   return {
@@ -73,6 +73,6 @@ Search.propTypes = PropTypes.shape({
       photo: PropTypes.string.isRequired,
       price: PropTypes.number.isRequired,
       year: PropTypes.number.isRequired,
-    }).isRequired
+    }).isRequired,
   ).isRequired,
 }).isRequired;

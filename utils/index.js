@@ -1,9 +1,9 @@
-import { useRouter } from 'next/router';
+import { useRouter } from "next/router";
 
 export const helper = (state = {}, send) => {
   const router = useRouter();
   const fetchData = () => {
-    send({ type: 'SET_LOADING', loading: true });
+    send({ type: "SET_LOADING", loading: true });
     const filter = {};
     if (state.context.filter.minYear) {
       filter.minYear = state.context.filter.minYear;
@@ -30,7 +30,7 @@ export const helper = (state = {}, send) => {
       filter.page = state.context.currentPage;
     }
     router.push({
-      pathname: '/search',
+      pathname: "/search",
       query: filter,
     });
     window.scrollTo(0, 0);
@@ -41,7 +41,7 @@ export const helper = (state = {}, send) => {
       type: `ADD_${filter.toUpperCase()}`,
       [filter]: e.target.value,
     });
-    send({ type: 'SET_CURRENT_PAGE', currentPage: 1 });
+    send({ type: "SET_CURRENT_PAGE", currentPage: 1 });
     fetchData();
   };
   return {

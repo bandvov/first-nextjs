@@ -1,32 +1,57 @@
-import Button from '@material-ui/core/Button';
-import Paper from '@material-ui/core/Paper';
-import PropTypes from 'prop-types';
-import { useContext, useEffect } from 'react';
+import Button from "@material-ui/core/Button";
+import Paper from "@material-ui/core/Paper";
+import PropTypes from "prop-types";
+import { useContext, useEffect } from "react";
 
-import Link from 'next/link';
-import Typography from '@material-ui/core/Typography';
-import { Grid } from '@material-ui/core';
-import { Create, Delete, Image } from '@material-ui/icons';
-import { useStyles } from './car-details.styles';
-import { MainContext } from '../../context/mainContext';
-import { deleteCar } from '../../operations/car-operations';
-import CustomCircularProgress from '../circularProgress/circularProgress';
+import Link from "next/link";
+import Typography from "@material-ui/core/Typography";
+import { Grid } from "@material-ui/core";
+import { Create, Delete, Image } from "@material-ui/icons";
+import { ToastContainer, toast } from "react-toastify";
+import { useStyles } from "./car-details.styles";
+import { MainContext } from "../../context/mainContext";
+import { deleteCar } from "../../operations/car-operations";
+import CustomCircularProgress from "../circularProgress/circularProgress";
+import "react-toastify/dist/ReactToastify.css";
 
-export default function CarDetails({ car, showError }) {
+export default function CarDetails({ car }) {
   const classes = useStyles();
-  const { state, send } = useContext(MainContext);
+  const { state, send, toast } = useContext(MainContext);
 
   useEffect(() => {
-    send({ type: 'SET_LOADING', loading: false });
+    send({ type: "SET_LOADING", loading: false });
   }, [car]);
 
   const deleteHandler = () => {
     send({
-      type: 'SHOW',
-      text: 'Are you sure you want to delete the car?',
-      handler: () => deleteCar(car._id),
+      type: "SHOW",
+      text: "Are you sure you want to delete the car?",
+      handler: async () => {
+        const deletedCar = await deleteCar(car._id);
+
+        if (deletedCar && deletedCar.error) {
+          toast.error(deletedCar.error, {
+            position: "bottom-center",
+            autoClose: 5000,
+            hideProgressBar: true,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: false,
+            progress: undefined,
+          });
+          return
+        }
+        toast.success('Car successfully deleted!', {
+          position: "bottom-center",
+          autoClose: 5000,
+          hideProgressBar: true,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: false,
+          progress: undefined,
+        });
+      },
     });
-    showError();
   };
 
   const date = new Date(+car.date).toLocaleDateString();
@@ -41,24 +66,24 @@ export default function CarDetails({ car, showError }) {
           md={7}
           id="photo div"
           style={{
-            padding: '1rem',
-            display: 'grid',
-            justifyItems: 'center',
-            alignItems: 'center',
-            minHeight: '10rem',
+            padding: "1rem",
+            display: "grid",
+            justifyItems: "center",
+            alignItems: "center",
+            minHeight: "10rem",
           }}
         >
           {car.photo ? (
             <img alt="car" className={classes.img} src={car.photo} />
           ) : (
-            <Image style={{ width: '100%', height: '100%' }} />
+            <Image style={{ width: "100%", height: "100%" }} />
           )}
         </Grid>
         <Grid container md={5}>
           <div
             style={{
-              display: 'flex',
-              flexDirection: 'column',
+              display: "flex",
+              flexDirection: "column",
             }}
           >
             <Typography
@@ -75,7 +100,9 @@ export default function CarDetails({ car, showError }) {
                 {car.model}
               </div>
               <Typography variant="h6" className={classes.price}>
-                <b>Price: </b>$ {car.price}
+                <b>Price: </b>
+                $
+                {car.price}
               </Typography>
               <div>
                 <b>Year: </b>
@@ -95,7 +122,9 @@ export default function CarDetails({ car, showError }) {
               </div>
               <div>
                 <b>Mileage: </b>
-                {car.mileage} km
+                {car.mileage}
+                {" "}
+                km
               </div>
               <div>
                 <b>External color: </b>
@@ -111,7 +140,7 @@ export default function CarDetails({ car, showError }) {
               </div>
             </Typography>
           </div>
-          <Grid container md={12} style={{ padding: '1rem' }}>
+          <Grid container md={12} style={{ padding: "1rem" }}>
             <div className={classes.buttonDiv}>
               <Link href={`/car/edit/${car._id}`}>
                 <Button
@@ -138,6 +167,7 @@ export default function CarDetails({ car, showError }) {
           </Grid>
         </Grid>
       </Grid>
+      <ToastContainer />
     </Paper>
   );
 }
@@ -146,6 +176,7 @@ CarDetails.propTypes = {
   car: PropTypes.shape({
     _id: PropTypes.string.isRequired,
     brand: PropTypes.string.isRequired,
+    date: PropTypes.string.isRequired,
     description: PropTypes.string.isRequired,
     model: PropTypes.string.isRequired,
     year: PropTypes.number.isRequired,

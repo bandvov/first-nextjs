@@ -1,25 +1,24 @@
-import PropTypes from 'prop-types';
-import { useContext, useEffect } from 'react';
-import Router from 'next/router';
-import { ToastContainer, toast } from 'react-toastify';
-import MainLayout from '../../components/main-layout';
-import CarDetails from '../../components/car-details/car-details';
-import { getCarById } from '../../operations/car-operations';
-import { MainContext } from '../../context/mainContext';
-import CustomCircularProgress from '../../components/circularProgress/circularProgress';
-import 'react-toastify/dist/ReactToastify.css';
+import PropTypes from "prop-types";
+import { useContext, useEffect } from "react";
+import { ToastContainer, toast } from "react-toastify";
+import MainLayout from "../../components/main-layout";
+import CarDetails from "../../components/car-details/car-details";
+import { getCarById } from "../../operations/car-operations";
+import { MainContext } from "../../context/mainContext";
+import CustomCircularProgress from "../../components/circularProgress/circularProgress";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function OneCar({ car = {}, error }) {
   const { state, send } = useContext(MainContext);
 
   useEffect(() => {
-    send({ type: 'SET_LOADING', loading: false });
+    send({ type: "SET_LOADING", loading: false });
   }, [car]);
 
   const showError = () => {
     if (error) {
       toast.dark(error, {
-        position: 'bottom-center',
+        position: "bottom-center",
         autoClose: 5000,
         hideProgressBar: true,
         closeOnClick: true,
@@ -75,5 +74,5 @@ OneCar.propTypes = {
 };
 
 OneCar.defaultProps = {
-  error: '',
+  error: "",
 };

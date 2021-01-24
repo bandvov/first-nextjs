@@ -1,4 +1,4 @@
-import carsServices from './cars.services';
+import carsServices from "./cars.services";
 
 const carsQuery = {
   getAllCars: async (_, args) => await carsServices.getAllCars(args),

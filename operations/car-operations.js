@@ -1,6 +1,6 @@
-import { gql } from 'apollo-boost';
-import Router from 'next/router';
-import { client } from '../utils/client';
+import { gql } from "apollo-boost";
+import Router from "next/router";
+import { client } from "../utils/client";
 
 export const getAllCars = async (skip, limit) => {
   const res = await client.query({
@@ -36,7 +36,7 @@ export const getCarsId = async () => {
         }
       }
     `,
-    fetchPolicy: 'no-cache',
+    fetchPolicy: "no-cache",
   });
   client.resetStore();
   return res.data.getAllCars.cars;
@@ -68,27 +68,33 @@ export const getCarById = async (id) => {
     client.resetStore();
     return res.data.getCarById;
   } catch (e) {
-    return { error: e.message.replace('GraphQL error:', '') };
+    return { error: e.message.replace("GraphQL error:", "") };
   }
 };
 
 export const addCar = async ({ car, upload }) => {
-  car.price = +car.price;
-  car.year = +car.year;
-  car.mileage = +car.mileage;
+  try {
+    car.price = +car.price;
+    car.year = +car.year;
+    car.mileage = +car.mileage;
 
-  const res = await client.mutate({
-    mutation: gql`
-      mutation($car: CarInput!, $upload: Upload) {
-        addCar(car: $car, upload: $upload) {
-          _id
+    const res = await client.mutate({
+      mutation: gql`
+        mutation($car: CarInput!, $upload: Upload) {
+          addCar(car: $car, upload: $upload) {
+            _id
+          }
         }
-      }
-    `,
-    variables: { car, upload },
-  });
-  Router.push('/');
-  return res.data.addCar;
+      `,
+      variables: { car, upload },
+    });
+    Router.push("/");
+    return res.data.addCar;
+  } catch (e) {
+    return {
+      error: e.message.replace("GraphQL error:", ""),
+    };
+  }
 };
 
 export const updateCar = async ({ id, car, upload }) => {
@@ -111,7 +117,7 @@ export const updateCar = async ({ id, car, upload }) => {
         upload,
       },
     });
-    Router.push('/');
+    Router.push("/");
     return res.data.updateCar;
   } catch (e) {
     return {
@@ -132,7 +138,7 @@ export const deleteCar = async (id) => {
       `,
       variables: { id },
     });
-    Router.push('/');
+    Router.push("/");
     return res.data.deleteCar;
   } catch (e) {
     return {
@@ -160,7 +166,7 @@ export const getFilteredCars = async (filter, skip, limit) => {
       }
     `,
     variables: { filter, skip, limit },
-    fetchPolicy: 'no-cache',
+    fetchPolicy: "no-cache",
   });
 
   return {

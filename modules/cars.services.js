@@ -1,6 +1,6 @@
-import cloudinary from 'cloudinary';
-import mongoose from 'mongoose';
-import Cars from './cars.model';
+import cloudinary from "cloudinary";
+import mongoose from "mongoose";
+import Cars from "./cars.model";
 
 cloudinary.v2.config({
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
@@ -16,11 +16,11 @@ class CarsServices {
 
   async getCarById({ id }) {
     if (!mongoose.isValidObjectId(id)) {
-      throw new Error('Not valid ID format');
+      throw new Error("Not valid ID format");
     }
     const car = await Cars.findById(id);
     if (!car) {
-      throw new Error('Car not found');
+      throw new Error("Car not found");
     }
     return car;
   }
@@ -28,7 +28,7 @@ class CarsServices {
   async addCar({ car, upload }) {
     await cloudinary.v2.uploader
       .upload(upload, {
-        upload_preset: 'ml_default',
+        upload_preset: "ml_default",
         use_filename: true,
       })
       .then(async (result) => {
@@ -36,23 +36,26 @@ class CarsServices {
         car.photo = url;
         car.public_id = public_id;
         return await new Cars(car).save();
+      })
+      .catch((e) => {
+        throw new Error("Image not provided");
       });
   }
 
   async updateCar({ id, car, upload }) {
     if (!mongoose.isValidObjectId(id)) {
-      throw new Error('Not valid ID format');
+      throw new Error("Not valid ID format");
     }
     const foundCar = await Cars.findById(id);
     if (!foundCar) {
-      throw new Error('Car not found');
+      throw new Error("Car not found");
     }
     if (upload) {
       await cloudinary.v2.uploader.destroy(foundCar.public_id);
 
       return await cloudinary.v2.uploader
         .upload(upload, {
-          upload_preset: 'ml_default',
+          upload_preset: "ml_default",
           use_filename: true,
         })
         .then(async (result) => {
@@ -67,11 +70,11 @@ class CarsServices {
 
   async deleteCar({ id }) {
     if (!mongoose.isValidObjectId(id)) {
-      throw new Error('Not valid ID format');
+      throw new Error("Not valid ID format");
     }
     const car = await Cars.findByIdAndDelete(id);
     if (!car) {
-      throw new Error('Car not found');
+      throw new Error("Car not found");
     }
     await cloudinary.v2.uploader.destroy(car.public_id);
     return car;
@@ -88,22 +91,22 @@ class CarsServices {
   configureFilter(data) {
     const filter = {};
     const {
-      brand = '',
-      model = '',
+      brand = "",
+      model = "",
       minYear = 1990,
       maxYear = 2022,
       minPrice = 0,
       maxPrice = 222222,
-      color = '',
-      searchText = '',
+      color = "",
+      searchText = "",
     } = data;
 
     if (brand) {
-      filter.brand = new RegExp(brand, 'i');
+      filter.brand = new RegExp(brand, "i");
     }
 
     if (model) {
-      filter.model = new RegExp(model, 'i');
+      filter.model = new RegExp(model, "i");
     }
 
     if (minPrice) {
@@ -123,10 +126,10 @@ class CarsServices {
     }
 
     if (color) {
-      filter.externalColor = new RegExp(color, 'i');
+      filter.externalColor = new RegExp(color, "i");
     }
     if (searchText) {
-      filter.description = new RegExp(searchText, 'i');
+      filter.description = new RegExp(searchText, "i");
     }
 
     return filter;

@@ -5,40 +5,77 @@ import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { Image } from '@material-ui/icons';
 import { useContext, useState } from 'react';
-
 import Link from 'next/link';
+import PropTypes from 'prop-types';
 import { useStyles } from './car-form.styles';
 import { carValidationMessages } from '../../configs/validation';
 import { carRegExp } from '../../configs/regexpSchemas';
-import { colors, years, categories } from '../../configs';
+import { years, categories } from '../../configs';
 import { MainContext } from '../../context/mainContext';
 import { addCar, updateCar } from '../../operations/car-operations';
 import ImageUploadContainer from '../image-upload-container';
+import 'react-toastify/dist/ReactToastify.css';
 
 const {
   MIN_LENGTH_MESSAGE,
   MAX_LENGTH_MESSAGE,
   VALIDATION_ERROR,
   PRICE_VALIDATION_ERROR,
+  EXTERNAL_COLOR_VALIDATION_ERROR,
 } = carValidationMessages;
 
 export function CarForm({ edit = false, car = {} }) {
   const classes = useStyles();
-  const { send } = useContext(MainContext);
+  const { send, toast } = useContext(MainContext);
   const [imageToShow, setImageToShow] = useState('');
 
   const addCarhandler = (car) => {
     send({
       type: 'SHOW',
       text: 'Are you sure you want to add the car?',
-      handler: () => addCar(car),
+      handler: async () => {
+        const newCar = await addCar(car);
+
+        if (newCar && newCar.error) {
+          toast.error(newCar.error, {
+            position: 'bottom-center',
+            autoClose: 5000,
+            hideProgressBar: true,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: false,
+            progress: undefined,
+          });
+          return;
+        }
+        toast.success('Car successfully addded!', {
+          position: 'bottom-center',
+          autoClose: 5000,
+          hideProgressBar: true,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: false,
+          progress: undefined,
+        });
+      },
     });
   };
   const updateCarhandler = (data) => {
     send({
       type: 'SHOW',
       text: 'Are you sure you want to update the car data?',
-      handler: () => updateCar(data),
+      handler: () => {
+        updateCar(data);
+        toast.success('Car successfully updated!', {
+          position: 'bottom-center',
+          autoClose: 5000,
+          hideProgressBar: true,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: false,
+          progress: undefined,
+        });
+      },
     });
   };
 
@@ -89,7 +126,7 @@ export function CarForm({ edit = false, car = {} }) {
     externalColor: Yup.string()
       .min(2, MIN_LENGTH_MESSAGE)
       .max(100, MAX_LENGTH_MESSAGE)
-      .matches(/^[a-zA-Z\s]+$/,'Only letters')
+      .matches(carRegExp.onlyLetters, EXTERNAL_COLOR_VALIDATION_ERROR)
       .required(VALIDATION_ERROR),
 
     category: Yup.string()
@@ -397,3 +434,40 @@ export function CarForm({ edit = false, car = {} }) {
     </Paper>
   );
 }
+
+CarForm.propTypes = {
+  edit: PropTypes.bool,
+  car: PropTypes.shape({
+    _id: PropTypes.string,
+    brand: PropTypes.string,
+    date: PropTypes.string,
+    description: PropTypes,
+    model: PropTypes.string,
+    year: PropTypes.number,
+    price: PropTypes.number,
+    mileage: PropTypes.number,
+    transmission: PropTypes,
+    externalColor: PropTypes,
+    photo: PropTypes.string,
+    engine: PropTypes.string,
+    category: PropTypes.string,
+  }),
+};
+CarForm.defaultProps = {
+  edit: false,
+  car: {
+    _id: '',
+    brand: '',
+    date: '',
+    description: '',
+    model: '',
+    year: 2020,
+    price: 0,
+    mileage: 0,
+    transmission: '',
+    externalColor: '',
+    photo: '',
+    engine: '',
+    category: 'Coupe',
+  },
+};

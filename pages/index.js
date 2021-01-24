@@ -1,18 +1,18 @@
-import PropTypes from 'prop-types';
-import { useContext, useEffect } from 'react';
-import MainLayout from '../components/main-layout';
-import Filters from '../components/filters';
-import { CarListItem } from '../components/car-list-item/car-list-item';
-import styles from '../styles/Home.module.css';
-import { getAllCars } from '../operations/car-operations';
-import CustomCircularProgress from '../components/circularProgress/circularProgress';
-import { MainContext } from '../context/mainContext';
+import PropTypes from "prop-types";
+import { useContext, useEffect } from "react";
+import MainLayout from "../components/main-layout";
+import Filters from "../components/filters";
+import { CarListItem } from "../components/car-list-item/car-list-item";
+import styles from "../styles/Home.module.css";
+import { getAllCars } from "../operations/car-operations";
+import CustomCircularProgress from "../components/circularProgress/circularProgress";
+import { MainContext } from "../context/mainContext";
 
 export default function Home({ cars = [] }) {
   const { state, send } = useContext(MainContext);
 
   useEffect(() => {
-    send({ type: 'SET_LOADING', loading: false });
+    send({ type: "SET_LOADING", loading: false });
   }, [cars]);
 
   const mappedCars = cars.map((value) => (
@@ -48,6 +48,6 @@ Home.propTypes = PropTypes.shape({
       photo: PropTypes.string.isRequired,
       price: PropTypes.number.isRequired,
       year: PropTypes.number.isRequired,
-    }).isRequired
+    }).isRequired,
   ).isRequired,
 }).isRequired;

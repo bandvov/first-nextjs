@@ -1,14 +1,14 @@
-import { TextField } from '@material-ui/core';
-import { useContext } from 'react';
-import PropTypes from 'prop-types';
-import { MainContext } from '../context/mainContext';
-import { helper } from '../utils';
+import { TextField } from "@material-ui/core";
+import { useContext } from "react";
+import PropTypes from "prop-types";
+import { MainContext } from "../context/mainContext";
+import { helper } from "../utils";
 
 export default function Facet({ data, name }) {
   const { state, send } = useContext(MainContext);
 
   const { changeHandler } = helper(state, send);
-  
+
   const mappedOptions = data.map((item) => (
     <option key={item} value={item}>
       {item}
@@ -37,6 +37,6 @@ export default function Facet({ data, name }) {
 Facet.propTypes = {
   name: PropTypes.string.isRequired,
   data: PropTypes.arrayOf(
-    PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+    PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   ).isRequired,
 };
