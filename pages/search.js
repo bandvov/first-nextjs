@@ -25,6 +25,7 @@ export default function Search({ cars = [], count }) {
     send({ type: "SET_CURRENT_PAGE", currentPage: value });
     fetchData();
   };
+
   const mapped = cars.map((car) => <CarListItem key={car._id} {...car} />);
 
   return (
