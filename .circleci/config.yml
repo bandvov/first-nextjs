@@ -4,12 +4,6 @@ orbs:
 workflows:
   build:
     jobs:
-      - cypress/install:
-          build: yarn build
-          start: yarn start
       - cypress/run:
-          requires:
-            - cypress/install
-          test: yarn test
-          yarn: true  
+          yarn: true
        
