@@ -1,7 +1,9 @@
-import React from 'react';
-import NextDocument, { Html, Head, Main, NextScript } from 'next/document';
-import { ServerStyleSheet as StyledComponentSheets } from 'styled-components';
-import { ServerStyleSheets as MaterialUiServerStyleSheets } from '@material-ui/styles';
+import React from "react";
+import NextDocument, {
+  Head, Html, Main, NextScript,
+} from "next/document";
+import { ServerStyleSheet as StyledComponentSheets } from "styled-components";
+import { ServerStyleSheets as MaterialUiServerStyleSheets } from "@material-ui/styles";
 
 export default class Document extends NextDocument {
   static async getInitialProps(ctx) {
@@ -10,13 +12,11 @@ export default class Document extends NextDocument {
     const originalRenderPage = ctx.renderPage;
 
     try {
-      ctx.renderPage = () =>
-        originalRenderPage({
-          enhanceApp: (App) => (props) =>
-            styledComponentSheet.collectStyles(
-              materialUiSheets.collect(<App {...props} />)
-            ),
-        });
+      ctx.renderPage = () => originalRenderPage({
+        enhanceApp: (App) => (props) => styledComponentSheet.collectStyles(
+          materialUiSheets.collect(<App {...props} />),
+        ),
+      });
 
       const initialProps = await NextDocument.getInitialProps(ctx);
 

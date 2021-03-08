@@ -4,7 +4,7 @@
   align-items: center;
   justify-content: flex-start;
   flex-direction: column;
-  min-height: 50vh;
+  min-height: 70vh;
 }
 
 .footer {
@@ -18,10 +18,9 @@
 }
 
 .cars {
-  min-height: 10rem;
   width: 95%;
   display: grid;
-  grid-template-columns: repeat(auto-fit,minmax(440px,1fr));
+  grid-template-columns: repeat(auto-fit, minmax(440px, 1fr));
   grid-template-rows: auto;
   grid-gap: 1.5rem;
   padding: 0.5rem;
@@ -39,14 +38,9 @@
 }
 }
 
-@media (max-width: 1980px) {
+@media (max-width: 2540px) {
 .cars {
   grid-template-columns: 1fr 1fr 1fr;
-}
-}
-@media (max-width: 1440px) {
-.cars {
-  grid-template-columns: 1fr 1fr
 }
 }
 

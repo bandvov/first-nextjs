@@ -1,6 +1,6 @@
-import { Button } from '@material-ui/core';
-import Link from 'next/link';
-import MainLayout from '../components/main-layout';
+import { Button } from "@material-ui/core";
+import Link from "next/link";
+import MainLayout from "../components/main-layout";
 
 export default function Error() {
   return (

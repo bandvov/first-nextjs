@@ -1,404 +1,228 @@
 {
   "cars": [
     {
-      "transmission": "Automatic",
-      "brand": "Toyota",
-      "model": "Corolla Sedan 1.8 ",
-      "year": 2020,
-      "price": 25400,
-      "engine": "Gasoline",
-      "mileage": 11000,
-      "color": "Black Metallic",
-      "color": "black",
-      "category": "Sedan",
-      "description": "Hybrid Active Plus // Adapt.cruise + lane monitor / Steering wheel heater / Digital instrument cluster / Reversing camera //"
-    },
-    {
-      "transmission": "Manual",
-      "brand": "Ford",
-      "model": "Focus 1.0 EcoBoost 125hp ",
-      "year": 2019,
-      "price": 22500,
-      "engine": "Gasoline",
-      "mileage": 36000,
-      "color": "Red metalic",
-
-      "category": "Hatchback",
-      "description": " Adapt.cruise + lane monitor / Heated windshield & steering wheel / Android Auto & Apple CarPlay //"
-    },
-    {
-      "transmission": "Automatic",
-      "brand": "BMW",
-      "model": "340xi Lim. Steptronic",
-      "year": 2018,
-      "price": 15300,
-      "engine": "Gasoline",
-      "mileage": 85000,
-      "color": "White Metallic",
-
-      "category": "Sedan",
-      "description": "Air conditioning 4 wheels driving Radar Recul BluetoothOn-board computerSpeed regulatorGPSHeated seatsAutomatic lighting of the lightsAutomatic windshield wiperSport Pack"
-    },
-    {
-      "transmission": "Automatic",
-      "brand": "BMW",
-      "model": "2 28i Steptronic M Sport ",
-      "year": 2018,
-      "price": 25300,
-      "engine": "Gasoline",
-      "mileage": 95000,
-      "color": "White Metallic",
-
-      "category": "Convertible",
-      "description": "BMW 2 sports seats front / seat covers / upholstery: leather Dakota / seats front electr. Adjustable (left with memory) / navigation package ConnectedDrive / hi-fi speaker system"
-    },
-    {
-      "transmission": "Manual",
-      "brand": "Audi",
-      "model": "A5 2.0 TDI quattro S-line ",
-      "year": 2018,
-      "price": 25800,
-      "engine": "Gasoline",
-      "mileage": 121000,
-      "color": "White Metallic",
-
-      "category": "Coupe",
-      "description": "Air conditioning Bluetooth On-board computer Speed regulator \nGPS Heated seats Automatic lighting of the lights Automatic windshield wiper Sport Pack Seats sport Sport suspensions Xenon"
-    },
-    {
-      "transmission": "Automat",
-      "brand": "Ford",
-      "model": "S-MAX 2,0 TDCi 150hv",
-      "year": 2018,
-      "price": 24400,
-      "engine": "Diesel",
-      "mileage": 137000,
-      "color": "Blue Metallic",
-
-      "category": "Hatchback",
-      "description": "Air conditioning Radar Recul Bluetooth On-board computer Speed regulator GPS Heated seats Automatic lighting of the lights Automatic windshield wiper Seats sport"
-    },
-    {
-      "transmission": "Automatic",
-      "brand": "Ford",
-      "model": "Focus 1,5 TDCi 120hv ",
-      "year": 2018,
-      "price": 20800,
-      "engine": "Diesel",
-      "mileage": 59000,
-      "color": "Blue Metallic",
-
-      "category": "Hatchback",
-      "description": "Start & Stop System Particulate filter Turbocharger / Intercooler Steering rack"
-    },
-    {
-      "transmission": "Manual",
-      "brand": "Volkswagen",
-      "model": "Golf VII GTD 2.0 TDI BMT",
-      "year": 2017,
-      "price": 17500,
-      "engine": "Diesel",
-      "mileage": 88000,
-      "color": "Blue metallic",
-
-      "category": null,
-      "description": "Air conditioning Radar Recul Bluetooth On-board computer\nSpeed regulator GPS Heated seats Automatic lighting of the lights\nAutomatic windshield wiper"
-    },
-    {
-      "transmission": "Automatic",
-      "brand": "BMW",
-      "model": "4 40 i xDrive M Sport Steptronic 8G",
-      "year": 2017,
-      "price": 33500,
-      "engine": "Gasoline",
-      "mileage": 115000,
-      "color": "Blue Metallic",
-
-      "category": "Coupe",
-      "description": "BMW 4 sports seats in front / heated windshield / seats in front electr. Adjustable (left with memory) / rear camera / tailgate control automatic / on-board computer"
-    },
-    {
-      "transmission": "Automatic",
-      "brand": "Toyota",
-      "model": "Rav4 2,5 Hybrid AWD Hybrid Edition",
-      "year": 2017,
-      "price": 32000,
-      "engine": "Hybrid",
-      "mileage": 93000,
-      "color": "White metalic",
-
-      "category": null,
-      "description": "Nickel metal hydride electric motor battery Memorized Settings including door mirror(s) Memorized Settings for 2 drivers Driver seat memory"
-    },
-    {
-      "transmission": "Automatic",
-      "brand": "BMW",
-      "model": "Baureihe 4 Gran Coupe",
-      "year": 2016,
-      "price": 22300,
-      "engine": "Diesel",
-      "mileage": 77000,
-      "color": "White Metallic",
-
-      "category": "Coupe",
-      "description": "Air conditioning Radar Recul Bluetooth On-board computer\nSpeed regulator GPS Heated seats Automatic windshield wiper"
-    },
-    {
-      "transmission": "Automatic",
-      "brand": "Audi",
-      "model": "S5 3.0 TFSI Cabrio quattro",
-      "year": 2016,
-      "price": 36500,
-      "engine": "Gasoline",
-      "mileage": 96000,
-      "color": "Blue",
-
-      "category": null,
-      "description": " Used Audi S5 Cabriolet CERTIFIED S5 3.0t Quattro AWD Premium Plus CAMERA NAV"
-    },
-    {
-      "transmission": "Manual",
-      "brand": "Ford",
-      "model": "Fiesta 1,0 EcoBoost 100hv",
-      "year": 2016,
-      "price": 24400,
-      "engine": "Gasoline",
-      "mileage": 59000,
-      "color": "Red Metallic",
-
-      "category": null,
-      "description": "Air conditioning\nBluetooth\nOn-board computer\nHeated seats"
-    },
-    {
-      "transmission": "Manual",
-      "brand": "BMW",
-      "model": "220d Coupe Sport Line",
-      "year": 2015,
-      "price": 15300,
-      "engine": "Gasoline",
-      "mileage": 85000,
-      "color": "Red Metallic",
-
-      "category": null,
-      "description": "try t   trt ert re re t ret re "
-    },
-    {
-      "transmission": "Manual",
-      "brand": "Audi",
-      "model": "Q3 2.0 TDI",
-      "year": 2015,
-      "price": 15800,
-      "engine": "Gasoline",
-      "mileage": 103000,
-      "color": "White Metallic",
-
-      "category": null,
-      "description": "Air conditioning Speed regulator Panoramic sunroof Automatic windshield wiper Sport Pack Opening roof"
-    },
-    {
-      "transmission": "Manual",
-      "brand": "BMW",
-      "model": "220 d Sport Line",
-      "year": 2015,
-      "price": 20500,
-      "engine": "Diesel",
-      "mileage": 97000,
-      "color": "Red Metallic",
-
-      "category": null,
-      "description": "Air conditioning Bluetooth On-board computer Speed regulator GPS Automatic lighting of the lights Automatic windshield wiper Seats sport Sport suspensions Xenon"
-    },
-    {
-      "transmission": "Automatic",
-      "brand": "Ford",
-      "model": "Mondeo 2.0 TDCi 150hp",
-      "year": 2015,
-      "price": 18200,
-      "engine": "Diesel",
-      "mileage": 120000,
-      "color": "White metallic",
-
-      "category": "Wagon",
-      "description": "Titanium Business Wagon / FINNISH CAR / 1-OWNER / BRAND MAINTENANCE / GOOD EQUIPMENT /"
-    },
-    {
-      "transmission": "Automatic",
       "brand": "Volkswagen",
       "model": "Touran Highline 1Hd",
       "year": 2014,
-      "price": 10000,
-      "engine": "diesel",
-      "mileage": 142000,
-      "color": "Blue Metallic",
-
-      "category": null,
-      "description": "Air conditioning Bluetooth On-board computer Heated seats"
-    },
-    {
-      "transmission": "Automatic",
-      "brand": "Toyota",
-      "model": "Yaris 1.33 440-i",
-      "year": 2014,
-      "price": 13400,
+      "firstOwner": true,
+      "price": 12000,
+      "mileage": 44986,
+      "photo": "https://cloud.leparking.fr/2019/11/16/01/35/volkswagen-touran-volkswagen-touran-highline-automatik-1-hd-sehr-gepflegt-top-blau_7269914132.jpg",
       "engine": "Gasoline",
-      "mileage": 55000,
-      "color": "Black metalic",
-
-      "category": null,
-      "description": "1.33 Dual VVT-i"
+      "transmission": "automatic",
+      "categories": "Minibus",
+      "externalColor": "Blue Metallic",
+      "colorSimpleName": "blue"
     },
     {
-      "transmission": "Manual",
-      "brand": "Ford",
-      "model": "Ford Fiesta 1,0 EcoBoost 100hv",
-      "year": 2014,
-      "price": 11800,
-      "engine": "Gasoline",
-      "mileage": 78000,
-      "color": "Black metalic",
-
-      "category": "Hatchback",
-      "description": "Air conditioning, Cruise control, Parking sensors, Rain sensor, Central locking, On board computer, Power steering  Alloy wheels, Metallic paint, Front fog lights Anti-lock brakes, "
-    },
-    {
-      "transmission": "Manual",
-      "brand": "Audi",
-      "model": "S5 3.0 TFSI Sportback quattro",
-      "year": 2013,
-      "price": 26800,
-      "engine": "Gasoline",
-      "mileage": 121000,
-      "color": "Red",
-
-      "category": null,
-      "description": "Audi Matrix LED headlamps incl. dynamic turn signal in front and rear\n- Matrix LED headlamps with dynamic turn signal in front and rear\n- Headlight washers"
-    },
-    {
-      "transmission": "Automat",
-      "brand": "Toyota",
-      "model": "Auris 1,8 Hybrid Premium",
-      "year": 2013,
-      "price": 19200,
-      "engine": "hybrid",
-      "mileage": 137000,
-      "color": "White Metallic",
-
-      "category": null,
-      "description": "Air conditioning, Cruise control, Radio / CD, Front and rear parking sensors, Parking sensors, Central locking Appearance, 2x tires, Alloy wheels, Bi-Xenon\nService manual, Motor heater, "
-    },
-    {
-      "transmission": "Manual",
-      "brand": "Opel",
-      "model": "Mokka Enjoy 1,6 ecoFLEX Start",
-      "year": 2013,
-      "price": 9500,
-      "engine": "Gasoline",
-      "mileage": 124000,
-      "color": "White Metallic",
-
-      "category": null,
-      "description": "Steering wheel heater / Parking sensors"
-    },
-    {
-      "transmission": "Automatic",
-      "brand": "Ford",
-      "model": "Ford Fiesta 1,0 EcoBoost 100hv",
-      "year": 2013,
-      "price": 22300,
-      "engine": "Gasoline",
-      "mileage": 78000,
-      "color": "Black metalic",
-
-      "category": "Hatchback",
-      "description": "PowerShift Titanium A6"
-    },
-    {
-      "transmission": "Steptronic",
-      "brand": "BMW",
-      "model": "525d Touring Steptronic",
-      "year": 2012,
-      "price": 28500,
-      "engine": "Diesel",
-      "mileage": 157000,
-      "color": "Black",
-
-      "category": "Wagon",
-      "description": "Air conditioning Rear view camera Radar Recul Bluetooth On-board computer Speed regulator GPS Heated seats Automatic lighting of the lights Automatic windshield wiper"
-    },
-    {
-      "transmission": "automatik",
-      "brand": "BMW",
-      "model": "530 TwinPower Turbo",
-      "year": 2011,
-      "price": 23390,
-      "engine": "doesel",
-      "mileage": 200000,
-      "color": "black",
-
-      "category": "Sedan",
-      "description": "Aut. airconditioning, Cruise control, Radio / CD, Central locking, On board computer\nService manual, Motor heater, Internal socket"
-    },
-    {
-      "transmission": "Automatic",
-      "brand": "Toyota",
-      "model": "Avensis 1,8 Valvematic",
-      "year": 2011,
-      "price": 12300,
-      "engine": "diesel",
-      "mileage": 143000,
-      "color": "Black metalic",
-
-      "category": "Wagon",
-      "description": "NAVI / KAMERA / BLUETOOTH"
-    },
-    {
-      "transmission": "Manual",
-      "brand": "Ford",
-      "model": "S-MAX 7-Place",
-      "year": 2011,
-      "price": 11800,
-      "engine": "diesel",
-      "mileage": 195000,
-      "color": "Grey metallic",
-      "photo": "https://mediacloud.carbuyer.co.uk/image/private/s--s9XbZ4HZ--/v1579626810/carbuyer/ford-s-max-001.jpg",
-      "category": "Wagon",
-      "description": "Air conditioning, Cruise control, Radio / CD, Electric. window lifters, Central locking, On board computer Stability control Service manual, Engine heater, Internal socket, Tow bar"
-    },
-    {
-      "transmission": "Automatic",
-      "brand": "Toyota",
-      "model": " Corolla 1,6 Valvematic",
-      "year": 2010,
-      "price": 10000,
-      "engine": "diesel",
-      "mileage": 162000,
-      "color": "White metalic",
-      "category": null,
-      "description": "asd dasd dasd asa d asda s das a  as ds d ad asda s da sd as d as das das a sdas d asd d dasd as das"
-    },
-    {
-      "transmission": "Manual",
       "brand": "Volkswagen",
       "model": "Tiguan Sport & Style 4Motion",
       "year": 2009,
+      "firstOwner": false,
       "price": 9900,
-      "engine": "Gasoline",
       "mileage": 100000,
-      "color": "White",
-      "category": null,
-      "description": "Air conditioning Radar Recul On-board computer Speed regulator\nHeated seats Attelage Automatic lighting of the lights "
+      "photo": "https://i.ebayimg.com/00/s/MTA2MFgxNjAw/z/TwsAAOSwmRVfV4vO/$_20.jpg",
+      "engine": "Gasoline",
+      "transmission": "Manual",
+      "categories": "Pickup",
+      "externalColor": "White",
+      "colorSimpleName": "White"
     },
     {
+      "brand": "Volkswagen",
+      "model": "Passat Comfortline BMT 2.0 TDI DSG",
+      "year": 2017,
+      "firstOwner": false,
+      "price": 17500,
+      "mileage": 107000,
+      "photo": "https://www.bazos.sk/img/1/899/116464899.jpg?t=1601413866",
+      "engine": "Diesel",
+      "transmission": "automatic",
+      "categories": "Saloon",
+      "externalColor": "White",
+      "colorSimpleName": "White"
+    },
+    {
+      "brand": "Volkswagen",
+      "model": "Golf VII GTD 2.0 TDI BMT",
+      "year": 2017,
+      "first owner": true,
+      "price": 17500,
+      "mileage": 88000,
+      "photo": "https://i.ebayimg.com/00/s/NzY4WDEwMjQ=/z/Vq0AAOSwZdBfiE0-/$_20.jpg",
+      "engine": "Diesel",
       "transmission": "Manual",
+      "categories": "Saloon",
+      "externalColor": "Blue metallic",
+      "colorSimpleName": "blue"
+    },
+    {
       "brand": "Volkswagen",
       "model": "GOLF V GTI BI-XENON",
       "year": 2008,
+      "first owner": false,
       "price": 8500,
-      "engine": "Gasoline",
       "mileage": 117000,
-      "color": "Red",
-      "category": null,
-      "description": "Air conditioning Radar Recul On-board computer Heated seats Automatic lighting of the lights Automatic windshield wiper Seats sport Sport suspensions Opening roof"
+      "photo": "https://i.ebayimg.com/00/s/MTE1N1gxNjAw/z/c2wAAOSwSRlfmvRg/$_20.jpg",
+      "engine": "Gasoline",
+      "transmission": "Manual",
+      "categories": "Saloon",
+      "externalColor": "Red",
+      "colorSimpleName": "Red"
+    },
+    {
+      "brand": "BMW",
+      "model": "525d Touring Steptronic",
+      "year": 2012,
+      "first owner": true,
+      "price": 28500,
+      "mileage": 157000,
+      "photo": "https://i.ebayimg.com/00/s/MTA2N1gxNjAw/z/l3EAAOSwt55fdewC/$_20.jpg",
+      "engine": "Diesel",
+      "transmission": "Manual",
+      "categories": "Saloon",
+      "externalColor": "Black",
+      "colorSimpleName": "Black"
+    },
+    {
+      "brand": "BMW",
+      "model": "Baureihe 4 Gran Coupe 420",
+      "year": 2016,
+      "firstOwner": true,
+      "price": 22300,
+      "mileage": 77000,
+      "photo": "https://i.ebayimg.com/00/s/MTA2N1gxNjAw/z/4twAAOSwGOZfmBqC/$_20.jpg",
+      "engine": "Diesel",
+      "transmission": "Automatic",
+      "categories": "Saloon",
+      "externalColor": "White Metallic",
+      "colorSimpleName": "White"
+    },
+    {
+      "brand": "BMW",
+      "model": "220d Coupe Sport Line",
+      "year": 2015,
+      "first owner": true,
+      "price": 15300,
+      "mileage": 85000,
+      "photo": "https://i.ebayimg.com/00/s/MTAwMFgxNTAw/z/EW0AAOSwH5tfezfP/$_20.jpg",
+      "engine": "Gasoline",
+      "transmission": "Manual",
+      "categories": "Coupe",
+      "externalColor": "Red Metallic",
+      "colorSimpleName": "red"
+    },
+    {
+      "brand": "BMW",
+      "model": "340xi Lim. Steptronic",
+      "year": 2018,
+      "first owner": true,
+      "price": 15300,
+      "mileage": 85000,
+      "photo": "https://i.ebayimg.com/00/s/MTAwMFgxNTAw/z/Wf4AAOSwHfdfiCYx/$_20.jpg",
+      "engine": "Gasoline",
+      "transmission": "Automatic",
+      "categories": "Saloon",
+      "externalColor": "White Metallic",
+      "colorSimpleName": "White"
+    },
+    {
+      "brand": "BMW",
+      "model": "2 28i Steptronic M Sport Cabrio +Bi-Xenon",
+      "year": 2018,
+      "firstOwner": true,
+      "price": 25300,
+      "mileage": 95000,
+      "photo": "https://dsjkerm4z0vii.cloudfront.net/sites/default/files/styles/vehicle_big/public/vehicleimages/16067/HHN577706_1.jpg",
+      "engine": "Gasoline",
+      "transmission": "Automatic",
+      "categories": "Coupe",
+      "externalColor": "White Metallic",
+      "colorSimpleName": "White"
+    },
+    {
+      "brand": "BMW",
+      "model": "4 40 i xDrive M Sport Steptronic 8G",
+      "year": 2017,
+      "first owner": true,
+      "price": 33500,
+      "mileage": 115000,
+      "photo": "https://dsjkerm4z0vii.cloudfront.net/sites/default/files/styles/vehicle_big/public/vehicleimages/16440/HHNA96866_1.jpg",
+      "engine": "Gasoline",
+      "transmission": "Automatic",
+      "categories": "Coupe",
+      "externalColor": "Blue Metallic",
+      "colorSimpleName": "Blue"
+    },
+    {
+      "brand": "Audi",
+      "model": "S5 3.0 TFSI Cabrio quattro",
+      "year": 2016,
+      "first owner": true,
+      "price": 36500,
+      "mileage": 96000,
+      "photo": "https://dsjkerm4z0vii.cloudfront.net/sites/default/files/styles/vehicle_big/public/vehicleimages/16187/HHN004513_1.jpg",
+      "engine": "Gasoline",
+      "transmission": "Automatic",
+      "categories": "Coupe",
+      "externalColor": "Blue",
+      "colorSimpleName": "Blue"
+    },
+    {
+      "brand": "Audi",
+      "model": "S5 3.0 TFSI Sportback quattro",
+      "year": 2013,
+      "first owner": false,
+      "price": 26800,
+      "mileage": 121000,
+      "photo": "https://dsjkerm4z0vii.cloudfront.net/sites/default/files/styles/vehicle_big/public/vehicleimages/15233/HHN031008_1.jpg",
+      "engine": "Gasoline",
+      "transmission": "Manual",
+      "categories": "Coupe",
+      "externalColor": "Red",
+      "colorSimpleName": "Red"
+    },
+    {
+      "brand": "Audi",
+      "model": "A5 2.0 TDI quattro S-line Sport",
+      "year": 2018,
+      "first owner": true,
+      "price": 25800,
+      "mileage": 121000,
+      "photo": "https://dsjkerm4z0vii.cloudfront.net/sites/default/files/styles/vehicle_big/public/vehicleimages/15330/HHN102561_1.jpg",
+      "engine": "Gasoline",
+      "transmission": "Manual",
+      "categories": "Coupe",
+      "externalColor": "White Metallic",
+      "colorSimpleName": "white"
+    },
+    {
+      "brand": "Audi",
+      "model": "Q3 2.0 TDI",
+      "year": 2015,
+      "first owner": true,
+      "price": 15800,
+      "mileage": 103000,
+      "photo": "https://dsjkerm4z0vii.cloudfront.net/sites/default/files/styles/vehicle_big/public/vehicleimages/15185/HHN044969_1.jpg",
+      "engine": "Gasoline",
+      "transmission": "Manual",
+      "categories": "SUV",
+      "externalColor": "White Metallic",
+      "colorSimpleName": "white"
+    },
+    {
+      "brand": "Audi",
+      "model": "A5 2.0 TFSI quattro",
+      "year": 2010,
+      "first owner": false,
+      "price": 19200,
+      "mileage": 143000,
+      "photo": "https://dsjkerm4z0vii.cloudfront.net/sites/default/files/styles/vehicle_big/public/vehicleimages/16390/HHN009845_1.jpg",
+      "engine": "Gasoline",
+      "transmission": "Manual",
+      "categories": "Saloon",
+      "externalColor": "Grey Metallic",
+      "colorSimpleName": "grey"
     }
   ]
 }

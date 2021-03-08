@@ -1,47 +1,46 @@
-import PropTypes from 'prop-types';
-import { useContext, useEffect } from 'react';
-import MainLayout from '../../components/main-layout';
-import CarDetails from '../../components/car-details/car-details';
-import { getCarById, getCarsId } from '../../operations/car-operations';
-import { MainContext } from '../../context/mainContext';
-import CustomCircularProgress from '../../components/circularProgress/circularProgress';
+import PropTypes from "prop-types";
+import { useContext, useEffect } from "react";
+import MainLayout from "../../components/main-layout";
+import CarDetails from "../../components/car-details/car-details";
+import { getCarById } from "../../operations/car-operations";
+import { MainContext } from "../../context/mainContext";
+import CustomCircularProgress from "../../components/custom-circular-progress/custom-circullar-progress";
 
-export default function OneCar({ car = {} }) {
+export default function OneCar({ car = {}, error }) {
   const { state, send } = useContext(MainContext);
 
   useEffect(() => {
-    send({ type: 'SET_LOADING', loading: false });
+    send({ type: "SET_LOADING", loading: false });
   }, [car]);
 
   return (
     <MainLayout>
       {state.context.loading ? (
-        <CustomCircularProgress ress />
+        <CustomCircularProgress />
+      ) : error ? (
+        <h1>{error}</h1>
       ) : (
         <CarDetails car={car} />
       )}
+
     </MainLayout>
   );
 }
-export async function getStaticProps(ctx) {
+export async function getServerSideProps(ctx) {
   const car = await getCarById(ctx.params.id);
+
+  if (car.error) {
+    return {
+      props: {
+        error: car.error,
+      },
+    };
+  }
 
   return {
     props: {
       car,
     },
-  };
-}
-export async function getStaticPaths() {
-  const cars = await getCarsId();
-
-  return {
-    paths: cars.map((car) => ({
-      params: {
-        id: car._id,
-      },
-    })),
-    fallback: false,
   };
 }
 
@@ -56,4 +55,9 @@ OneCar.propTypes = {
     externalColor: PropTypes.string.isRequired,
     photo: PropTypes.string.isRequired,
   }).isRequired,
+  error: PropTypes.string,
+};
+
+OneCar.defaultProps = {
+  error: "",
 };

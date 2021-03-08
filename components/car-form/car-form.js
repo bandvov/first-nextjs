@@ -1,135 +1,185 @@
-import Grid from '@material-ui/core/Grid';
-import Paper from '@material-ui/core/Paper';
-import { Button, TextField } from '@material-ui/core';
-import { useFormik } from 'formik';
-import * as Yup from 'yup';
-import { Image } from '@material-ui/icons';
-import { useContext } from 'react';
-import Router from 'next/router';
-import Link from 'next/link';
-import { useStyles } from './car-form.styles';
-import { carValidationMessages } from '../../configs/validation';
-import { carRegExp } from '../../configs/regexpSchemas';
-import { colors, years, categories } from '../../configs';
-import { MainContext } from '../../context/mainContext';
-import { addCar, updateCar } from '../../operations/car-operations';
+import Grid from "@material-ui/core/Grid";
+import Paper from "@material-ui/core/Paper";
+import { Button, TextField } from "@material-ui/core";
+import { useFormik } from "formik";
+import * as Yup from "yup";
+import { Image } from "@material-ui/icons";
+import { useContext, useState } from "react";
+import Link from "next/link";
+import PropTypes from "prop-types";
+import { useStyles } from "./car-form.styles";
+import { carValidationMessages } from "../../configs/validation";
+import { carRegExp } from "../../configs/regexpSchemas";
+import { categories, years } from "../../configs";
+import { MainContext } from "../../context/mainContext";
+import { addCar, updateCar } from "../../operations/car-operations";
+import ImageUploadContainer from "../image-upload-container";
 
 const {
   MIN_LENGTH_MESSAGE,
   MAX_LENGTH_MESSAGE,
   VALIDATION_ERROR,
   PRICE_VALIDATION_ERROR,
+  EXTERNAL_COLOR_VALIDATION_ERROR,
 } = carValidationMessages;
 
-export function CarForm({ edit = false, car = {} }) {
+export function CarForm({
+  edit = false,
+  car = {},
+}) {
   const classes = useStyles();
-  const { send } = useContext(MainContext);
+  const { send, toast } = useContext(MainContext);
+  const [imageToShow, setImageToShow] = useState("");
 
   const addCarhandler = (car) => {
     send({
-      type: 'SHOW',
-      text: 'Are you sure you want to add the car?',
-      handler: () => addCar(car),
-      push: () => Router.push('/'),
+      type: "SHOW",
+      text: "Are you sure you want to add the car?",
+      handler: async () => {
+        const newCar = await addCar(car);
+
+        if (newCar && newCar.error) {
+          toast.error(newCar.error, {
+            position: "bottom-center",
+            autoClose: 5000,
+            hideProgressBar: true,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: false,
+            progress: undefined,
+          });
+          return;
+        }
+        toast.success("Car successfully added!", {
+          position: "bottom-center",
+          autoClose: 5000,
+          hideProgressBar: true,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: false,
+          progress: undefined,
+        });
+      },
     });
   };
   const updateCarhandler = (data) => {
     send({
-      type: 'SHOW',
-      text: 'Are you sure you want to update the car data?',
-      handler: () => updateCar(data),
-      push: () => Router.push('/'),
+      type: "SHOW",
+      text: "Are you sure you want to update the car data?",
+      handler: () => {
+        updateCar(data);
+        toast.success("Car successfully updated!", {
+          position: "bottom-center",
+          autoClose: 5000,
+          hideProgressBar: true,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: false,
+          progress: undefined,
+        });
+      },
     });
   };
 
-  const mappedColors = colors.map((color) => (
-    <option key={color}>{color}</option>
-  ));
   const mappedYears = years.map((year) => <option key={year}>{year}</option>);
 
-  const mappedCategories = categories.map((category) => (
-    <option key={category}>{category}</option>
-  ));
+  const mappedCategories = categories.map((category) => <option key={category}>{category}</option>);
 
-  const formSchema = Yup.object().shape({
-    brand: Yup.string()
-      .min(2, MIN_LENGTH_MESSAGE)
-      .max(100, MAX_LENGTH_MESSAGE)
-      .required(VALIDATION_ERROR),
+  const formSchema = Yup.object()
+    .shape({
+      brand: Yup.string()
+        .min(2, MIN_LENGTH_MESSAGE)
+        .max(100, MAX_LENGTH_MESSAGE)
+        .required(VALIDATION_ERROR),
 
-    model: Yup.string()
-      .min(2, MIN_LENGTH_MESSAGE)
-      .max(100, MAX_LENGTH_MESSAGE)
-      .required(VALIDATION_ERROR),
+      model: Yup.string()
+        .min(2, MIN_LENGTH_MESSAGE)
+        .max(100, MAX_LENGTH_MESSAGE)
+        .required(VALIDATION_ERROR),
 
-    year: Yup.string()
-      .matches(carRegExp.onlyPositiveDigits, PRICE_VALIDATION_ERROR)
-      .required(VALIDATION_ERROR),
+      year: Yup.string()
+        .matches(carRegExp.onlyPositiveDigits, PRICE_VALIDATION_ERROR)
+        .required(VALIDATION_ERROR),
 
-    engine: Yup.string()
-      .min(2, MIN_LENGTH_MESSAGE)
-      .max(100, MAX_LENGTH_MESSAGE)
-      .required(VALIDATION_ERROR),
+      engine: Yup.string()
+        .min(2, MIN_LENGTH_MESSAGE)
+        .max(100, MAX_LENGTH_MESSAGE)
+        .required(VALIDATION_ERROR),
 
-    transmission: Yup.string()
-      .min(2, MIN_LENGTH_MESSAGE)
-      .max(100, MAX_LENGTH_MESSAGE)
-      .required(VALIDATION_ERROR),
+      transmission: Yup.string()
+        .min(2, MIN_LENGTH_MESSAGE)
+        .max(100, MAX_LENGTH_MESSAGE)
+        .required(VALIDATION_ERROR),
 
-    mileage: Yup.string()
-      .matches(carRegExp.onlyPositiveDigits, PRICE_VALIDATION_ERROR)
-      .required(VALIDATION_ERROR),
+      mileage: Yup.string()
+        .matches(carRegExp.onlyPositiveDigits, PRICE_VALIDATION_ERROR)
+        .required(VALIDATION_ERROR),
 
-    price: Yup.string()
-      .matches(carRegExp.onlyPositiveDigits, PRICE_VALIDATION_ERROR)
-      .required(VALIDATION_ERROR),
-    photo: Yup.string().required(VALIDATION_ERROR),
+      price: Yup.string()
+        .matches(carRegExp.onlyPositiveDigits, PRICE_VALIDATION_ERROR)
+        .required(VALIDATION_ERROR),
 
-    description: Yup.string()
-      .min(2, MIN_LENGTH_MESSAGE)
-      .max(200, MAX_LENGTH_MESSAGE)
-      .required(VALIDATION_ERROR),
+      description: Yup.string()
+        .min(2, MIN_LENGTH_MESSAGE)
+        .max(200, MAX_LENGTH_MESSAGE)
+        .required(VALIDATION_ERROR),
 
-    externalColor: Yup.string()
-      .min(2, MIN_LENGTH_MESSAGE)
-      .max(100, MAX_LENGTH_MESSAGE)
-      .required(VALIDATION_ERROR),
+      externalColor: Yup.string()
+        .min(2, MIN_LENGTH_MESSAGE)
+        .max(100, MAX_LENGTH_MESSAGE)
+        .matches(carRegExp.onlyLetters, EXTERNAL_COLOR_VALIDATION_ERROR)
+        .required(VALIDATION_ERROR),
 
-    colorSimpleName: Yup.string()
-      .min(2, MIN_LENGTH_MESSAGE)
-      .max(100, MAX_LENGTH_MESSAGE)
-      .required(VALIDATION_ERROR),
+      category: Yup.string()
+        .min(2, MIN_LENGTH_MESSAGE)
+        .max(100, MAX_LENGTH_MESSAGE)
+        .required(VALIDATION_ERROR),
+    });
 
-    category: Yup.string()
-      .min(2, MIN_LENGTH_MESSAGE)
-      .max(100, MAX_LENGTH_MESSAGE)
-      .required(VALIDATION_ERROR),
-  });
-
-  const { values, handleChange, handleSubmit, errors, touched } = useFormik({
+  const {
+    values,
+    handleChange,
+    handleSubmit,
+    errors,
+    touched,
+  } = useFormik({
     validationSchema: formSchema,
     validateOnBlur: true,
     initialValues: {
-      brand: car.brand || '',
-      year: car.year || '',
-      model: car.model || '',
-      photo: car.photo || '',
-      price: car.price || '',
-      engine: car.engine || '',
-      mileage: car.mileage || '',
-      description: car.description || '',
-      transmission: car.transmission || '',
-      externalColor: car.externalColor || '',
-      colorSimpleName: car.colorSimpleName || '',
-      category: car.category || '',
+      brand: car.brand || "",
+      year: car.year || "",
+      model: car.model || "",
+      photo: car.photo || "",
+      price: car.price || "",
+      engine: car.engine || "",
+      mileage: car.mileage || "",
+      description: car.description || "",
+      transmission: car.transmission || "",
+      externalColor: car.externalColor || "",
+      category: car.category || "",
     },
     onSubmit: (data) => {
       if (edit) {
-        updateCarhandler({ id: car._id, car: data });
+        updateCarhandler({
+          id: car._id,
+          car: data,
+          upload: imageToShow,
+        });
+        return;
       }
-      addCarhandler(data);
+      addCarhandler({ car: data, upload: imageToShow });
     },
   });
+
+  const handleImageLoad = (evt) => {
+    if (evt.target.files && evt.target.files[0]) {
+      const reader = new FileReader();
+      reader.readAsDataURL(evt.target.files[0]);
+      reader.onload = (e) => {
+        setImageToShow(e.target.result);
+      };
+    }
+  };
 
   return (
     <Paper elevation={10}>
@@ -137,51 +187,62 @@ export function CarForm({ edit = false, car = {} }) {
         <Paper className={classes.paper}>
           <Grid container spacing={2}>
             <Grid
-              container
+              item
               md={4}
               id="photo div"
               style={{
-                padding: '1rem',
-                display: 'grid',
-                justifyItems: 'center',
-                alignItems: 'center',
-                minHeight: '10rem',
+                padding: "1rem",
+                display: "grid",
+                justifyItems: "center",
+                alignItems: "center",
+                minHeight: "10rem",
               }}
             >
-              {values.photo ? (
+              {imageToShow || values.photo ? (
                 <img
                   alt="car"
-                  style={{ maxWidth: '100%', height: 'auto' }}
-                  src={values.photo}
+                  style={{
+                    maxWidth: "100%",
+                    height: "auto",
+                  }}
+                  src={imageToShow || values.photo}
                 />
               ) : (
-                <Image style={{ width: '100%', height: '100%' }} />
+                <Image style={{
+                  width: "100%",
+                  height: "100%",
+                }}
+                />
               )}
             </Grid>
             <Grid container md={8}>
-              <Grid container md={12} style={{ padding: '1rem' }}>
-                <Grid sm={12} md={12} style={{ padding: '1rem 1rem 0' }}>
+              <Grid container style={{ padding: "1rem" }}>
+                <Grid
+                  item
+                  xs={12}
+                  sm={12}
+                  md={12}
+                  style={{ padding: "1rem 1rem 0" }}
+                >
                   <div className={classes.inputMargin}>
-                    <TextField
-                      error={touched.photo && errors.photo}
-                      name="photo"
-                      label="Photo"
-                      placeholder="Photo"
-                      size="small"
-                      fullWidth
-                      value={values.photo}
-                      variant="outlined"
-                      onChange={handleChange}
+                    <ImageUploadContainer
+                      handler={handleImageLoad}
+                      buttonLabel="Upload photo"
                     />
-                    {touched.photo && errors.photo && (
-                      <div className={classes.inputError}>{errors.photo}</div>
+                    {touched.upload && errors.upload && (
+                      <div className={classes.inputError}>{errors.upload}</div>
                     )}
                   </div>
                 </Grid>
-                <Grid item style={{ padding: '0 1rem' }} xs={12} sm={12} md={6}>
+                <Grid
+                  item
+                  style={{ padding: "0 1rem" }}
+                  xs={12}
+                  sm={12}
+                  md={6}
+                >
                   <div className={classes.inputMargin}>
                     <TextField
-                      aria-label="enter car brand"
                       name="brand"
                       error={touched.brand && errors.brand}
                       placeholder="Brand"
@@ -242,7 +303,9 @@ export function CarForm({ edit = false, car = {} }) {
                       value={values.engine}
                     />
                     {touched.engine && errors.engine && (
-                      <div className={classes.inputError}>{errors.engine}</div>
+                      <div className={classes.inputError}>
+                        {errors.engine}
+                      </div>
                     )}
                   </div>
                   <div className={classes.inputMargin}>
@@ -264,7 +327,13 @@ export function CarForm({ edit = false, car = {} }) {
                     )}
                   </div>
                 </Grid>
-                <Grid item style={{ padding: '0 1rem' }} xs={12} sm={12} md={6}>
+                <Grid
+                  item
+                  style={{ padding: "0 1rem" }}
+                  xs={12}
+                  sm={12}
+                  md={6}
+                >
                   <div className={classes.inputMargin}>
                     <TextField
                       name="mileage"
@@ -278,33 +347,12 @@ export function CarForm({ edit = false, car = {} }) {
                       value={values.mileage}
                     />
                     {touched.mileage && errors.mileage && (
-                      <div className={classes.inputError}>{errors.mileage}</div>
-                    )}
-                  </div>
-
-                  <div className={classes.inputMargin}>
-                    <TextField
-                      name="colorSimpleName"
-                      error={touched.colorSimpleName && errors.colorSimpleName}
-                      placeholder="Simple color"
-                      select
-                      label="Simple color"
-                      SelectProps={{ native: true }}
-                      size="small"
-                      fullWidth
-                      variant="outlined"
-                      onChange={handleChange}
-                      value={values.colorSimpleName}
-                    >
-                      <option />
-                      {mappedColors}
-                    </TextField>
-                    {touched.colorSimpleName && errors.colorSimpleName && (
                       <div className={classes.inputError}>
-                        {errors.colorSimpleName}
+                        {errors.mileage}
                       </div>
                     )}
                   </div>
+
                   <div className={classes.inputMargin}>
                     <TextField
                       name="year"
@@ -319,7 +367,6 @@ export function CarForm({ edit = false, car = {} }) {
                       onChange={handleChange}
                       value={values.year}
                     >
-                      <option />
                       {mappedYears}
                     </TextField>
                     {touched.year && errors.year && (
@@ -340,10 +387,9 @@ export function CarForm({ edit = false, car = {} }) {
                       onChange={handleChange}
                       value={values.transmission}
                     >
-                      <option />
+
                       <option>Automatic</option>
                       <option>Manual</option>
-                      <option>Steptronic</option>
                     </TextField>
                     {touched.transmission && errors.transmission && (
                       <div className={classes.inputError}>
@@ -365,7 +411,6 @@ export function CarForm({ edit = false, car = {} }) {
                       onChange={handleChange}
                       value={values.category}
                     >
-                      <option />
                       {mappedCategories}
                     </TextField>
                     {touched.category && errors.category && (
@@ -380,9 +425,9 @@ export function CarForm({ edit = false, car = {} }) {
                   sm={12}
                   md={12}
                   item
-                  style={{ padding: '0 1rem' }}
+                  style={{ padding: "0 1rem" }}
                 >
-                  <div style={{ minHeight: '70px' }}>
+                  <div style={{ marginBottom: "1rem" }}>
                     <TextField
                       name="description"
                       error={touched.description && errors.description}
@@ -403,13 +448,13 @@ export function CarForm({ edit = false, car = {} }) {
                   </div>
                 </Grid>
                 <div className={classes.buttonDiv}>
-                  <Link href="/">
-                    <Button type="button" variant="outlined" color="secondary">
-                      Back to main
-                    </Button>
-                  </Link>
-                  <Button type="submit" variant="contained" color="primary">
-                    Create car
+                  <Link href="/"><Button type="button" variant="outlined" color="secondary">Back to main</Button></Link>
+                  <Button
+                    type="submit"
+                    variant="contained"
+                    color="primary"
+                  >
+                    save changes
                   </Button>
                 </div>
               </Grid>
@@ -420,3 +465,40 @@ export function CarForm({ edit = false, car = {} }) {
     </Paper>
   );
 }
+
+CarForm.propTypes = {
+  edit: PropTypes.bool,
+  car: PropTypes.shape({
+    _id: PropTypes.string,
+    brand: PropTypes.string,
+    date: PropTypes.string,
+    description: PropTypes,
+    model: PropTypes.string,
+    year: PropTypes.number,
+    price: PropTypes.number,
+    mileage: PropTypes.number,
+    transmission: PropTypes,
+    externalColor: PropTypes,
+    photo: PropTypes.string,
+    engine: PropTypes.string,
+    category: PropTypes.string,
+  }),
+};
+CarForm.defaultProps = {
+  edit: false,
+  car: {
+    _id: "",
+    brand: "",
+    date: "",
+    description: "",
+    model: "",
+    year: 2020,
+    price: 0,
+    mileage: 0,
+    transmission: "",
+    externalColor: "",
+    photo: "",
+    engine: "",
+    category: "Coupe",
+  },
+};

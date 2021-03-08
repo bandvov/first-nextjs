@@ -1,12 +1,16 @@
 import { useContext, useEffect } from 'react';
 import { useRouter } from 'next/router';
-import { colors, brands, years, prices } from '../configs';
+import Button from '@material-ui/core/Button';
+import { brands, colors, prices, years } from '../configs';
 import { MainContext } from '../context/mainContext';
 import Facet from './facet';
+import { helper } from '../utils';
 
 export default function Filters() {
   const { state, send } = useContext(MainContext);
   const router = useRouter();
+
+  const { fetchData } = helper(state, send);
 
   useEffect(() => {
     if (router.route !== '/') {
@@ -32,9 +36,9 @@ export default function Filters() {
         (!state.context.filter.searchText &&
           router.query.searchText &&
           router.query.searchText !== state.context.filter.searchText) ||
-        (!state.context.currentPage &&
+        (!state.context.filter.currentPage &&
           router.query.page &&
-          router.query.page !== state.context.currentPage)
+          router.query.page !== state.context.filter.currentPage)
       ) {
         send({
           type: 'SET_FILTERS',
@@ -57,8 +61,16 @@ export default function Filters() {
     if (router.route === '/') {
       send({ type: 'CLEAR_FILTER' });
     }
-    send({ type: 'SET_CURRENT_PAGE', currentPage: router.query.page });
+    send({
+      type: 'SET_CURRENT_PAGE',
+      currentPage: router.query.page,
+    });
   }, []);
+
+  const clearFilterHandler = () => {
+    send({ type: 'CLEAR_FILTER' });
+    fetchData();
+  };
 
   return (
     <div
@@ -70,6 +82,7 @@ export default function Filters() {
         gridTemplateColumns: 'repeat(auto-fit, minmax(160px, 1fr))',
         gridTemplateRows: 'auto',
       }}
+      data-cy="filters"
     >
       <Facet data={brands} name="brand" />
       <Facet data={colors} name="color" />
@@ -77,6 +90,9 @@ export default function Filters() {
       <Facet data={years} name="maxYear" />
       <Facet data={prices} name="minPrice" />
       <Facet data={prices} name="maxPrice" />
+      <Button color="secondary" variant="outlined" onClick={clearFilterHandler}>
+        clear all filters
+      </Button>
     </div>
   );
 }

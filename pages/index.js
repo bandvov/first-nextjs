@@ -1,22 +1,33 @@
+import { useContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import { useContext, useEffect } from 'react';
+import { Fade } from '@material-ui/core';
 import MainLayout from '../components/main-layout';
 import Filters from '../components/filters';
 import { CarListItem } from '../components/car-list-item/car-list-item';
 import styles from '../styles/Home.module.css';
 import { getAllCars } from '../operations/car-operations';
-import CustomCircularProgress from '../components/circularProgress/circularProgress';
+import CustomCircularProgress from '../components/custom-circular-progress/custom-circullar-progress';
 import { MainContext } from '../context/mainContext';
 
 export default function Home({ cars = [] }) {
   const { state, send } = useContext(MainContext);
 
-  useEffect(() => {
-    send({ type: 'SET_LOADING', loading: false });
-  }, [cars]);
+  const [show, setShow] = useState(false);
 
-  const mappedCars = cars.map((value) => (
-    <CarListItem key={value._id} {...value} />
+  useEffect(() => {
+    send({
+      type: 'SET_LOADING',
+      loading: false,
+    });
+    setShow(true);
+  }, [cars, setShow]);
+
+  const mappedCars = cars.map((value, index) => (
+    <Fade key={value._id} in={show} timeout={index * 200}>
+      <div>
+        <CarListItem {...value} />
+      </div>
+    </Fade>
   ));
 
   return (
@@ -25,14 +36,19 @@ export default function Home({ cars = [] }) {
       {state.context.loading ? (
         <CustomCircularProgress />
       ) : (
-        <div className={styles.cars}>{cars && mappedCars}</div>
+        <div data-cy="main-page-cars" className={styles.cars}>
+          {cars && mappedCars}
+        </div>
       )}
     </MainLayout>
   );
 }
 
 Home.getInitialProps = async () => {
-  const res = await getAllCars(0, 12);
+  const res = await getAllCars({
+    skip: 0,
+    limit: 12,
+  });
 
   return {
     cars: res.cars,
