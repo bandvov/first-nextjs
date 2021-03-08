@@ -4,8 +4,6 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/0dc76df07c304c91b1c950fbf66bf619)](https://app.codacy.com/gh/vvas1/cars?utm_source=github.com&utm_medium=referral&utm_content=vvas1/cars&utm_campaign=Badge_Grade)
 
-![cypress version](https://img.shields.io/badge/cypress-6.6.0-brightgreen) [![badges](https://github.com/bandvov/first-nextjs/actions/workflows/badges.yml/badge.svg)](https://github.com/bandvov/first-nextjs/actions/workflows/badges.yml)
-
 First, run the development server:
 
 ```bash
