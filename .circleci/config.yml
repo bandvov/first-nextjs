@@ -32,7 +32,7 @@ jobs:
       -
         run:
           name: 'Build Application'
-          command: yarn install && yarn run build && yarn run generate-zip
+          command: yarn install -f && yarn run build && yarn test
       -
         run:
           name: 'Install Python'
