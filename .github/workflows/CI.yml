@@ -1,0 +1,23 @@
+name: ci
+on: push
+jobs:
+  cypress-run:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout 🛎
+        uses: actions/checkout@v1
+
+      # Install NPM dependencies, cache them correctly
+      - name: Install dependencies
+        run: yarn install
+      - name: Build application
+        run: yarn build
+      - name: Start application
+        run: yarn start
+        
+      # and run all Cypress tests
+      - name: Cypress run 🧪
+        uses: cypress-io/github-action@v2
+        with:
+          yarn: true
+          command: npm test
