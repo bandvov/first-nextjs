@@ -20,4 +20,4 @@ jobs:
         uses: cypress-io/github-action@v2
         with:
           yarn: true
-          command: npm test
+          command: yarn test
