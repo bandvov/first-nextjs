@@ -3,7 +3,7 @@ jobs:
   test:
     docker:
       -
-        image: 'circleci/node:10.8.0'
+        image: 'circleci/node:14.0.0'
     working_directory: ~/app-name-directory
     steps:
       - checkout
@@ -32,7 +32,7 @@ jobs:
       -
         run:
           name: 'Build Application'
-          command: yarn install -f && yarn run build && yarn test
+          command: yarn install && yarn run build && yarn test
       -
         run:
           name: 'Install Python'
