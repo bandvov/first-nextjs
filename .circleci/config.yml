@@ -4,10 +4,6 @@ orbs:
 workflows:
   build:
     jobs:
-      - cypress/run:
-          yarn: true
-          install-command: 'yarn install'
+      - cypress/test:
           start: yarn start
-          wait-on: 'http://localhost:3000'
-          post-steps:
-            - run: 'CI=false yarn build'
+          wait-on: 'http://localhost:4200'
