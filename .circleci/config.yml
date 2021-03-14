@@ -12,7 +12,6 @@ workflows:
           name: 4 machines
           requires:
             - cypress/install
-          record: true
           parallel: true
           parallelism: 4
           group: 4 machines
