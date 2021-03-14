@@ -1,11 +1,9 @@
 version: 2.1
 orbs:
-  cypress: cypress-io/cypress@1
- 
+  cypress: cypress-io/cypress@1 
 workflows:
   build:
     jobs:
-      - npm: npm ci
       - cypress/run:
           start: yarn start
-          wait-on: 'http://localhost:4200'
+          wait-on: 'http://localhost:3000'
