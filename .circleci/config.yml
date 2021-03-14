@@ -4,6 +4,6 @@ orbs:
 workflows:
   build:
     jobs:
-      - cypress/test:
+      - cypress/run:
           start: yarn start
           wait-on: 'http://localhost:4200'
