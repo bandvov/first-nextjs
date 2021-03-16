@@ -27,6 +27,6 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-    - name: Run test
     - uses: actions/checkout@v2
+    - name: Run test
     - run: yarn test
