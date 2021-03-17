@@ -23,9 +23,8 @@ jobs:
       run: yarn start &
       
     - name: sleep 60s  
-      uses: jakejarvis/wait-action@master
       with:
-       time: '60s'
+        sleep: 60
     - name: run tests 
       run: yarn test   
        
