@@ -20,12 +20,8 @@ jobs:
       run: yarn build
       
     - name: Start 
-      run: yarn start &
+      run: yarn start & sleep 30 &
       
-    - name: Sleep for 10s
-      uses: juliangruber/sleep-action@v1
-      with:
-       time: 60s
     - name: test
       run: yarn test
        
