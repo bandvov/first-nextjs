@@ -21,7 +21,22 @@ jobs:
       
     - name: Start 
       run: yarn start &
-    - name: run tests
-      run: yarn test
+      
+    - name: sleep 60s  
+      with:
+        sleep: 60
+        run: yarn test   
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
      
   
