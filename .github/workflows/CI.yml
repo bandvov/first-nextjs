@@ -19,10 +19,9 @@ jobs:
     - name: Build
       run: yarn build
       
-    - name: Start & test
-      run: |
-        yarn start
-        sleep 30
-        yarn test
- 
+    - name: Start 
+      run: yarn start &
+    - name: run tests
+      run: yarn test
+     
   
