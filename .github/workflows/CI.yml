@@ -19,18 +19,10 @@ jobs:
     - name: Build
       run: yarn build
       
-    - name: Start 
-      run: yarn start
-
-  best:
-    name: Test
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v2
-      
-    - name: Install dependencies
-      run: yarn install
-      
-    - name: Start Tests
-      run: yarn test
+    - name: Start & test
+      run: |
+        yarn start
+        sleep 30
+        yarn test
  
+  
