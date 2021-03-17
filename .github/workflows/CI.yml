@@ -1,8 +1,3 @@
-# This workflow will do a clean install of node dependencies, build the source code and run tests across different versions of node
-# For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
-
-name: CI
-
 on:
   push:
     branches: [ main ]
@@ -10,24 +5,32 @@ on:
     branches: [ main ]
 jobs:
   build:
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version: [15.x]
-        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
-    steps:
-    - uses: actions/checkout@v2
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v1
-      with:
-        node-version: ${{ matrix.node-version }}
-    - run: yarn install
-    - run: yarn build 
-    - run: yarn start
-  test:
+    name: Build
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: Use Node.js ${{ matrix.node-version }}
-    - run: yarn test
+      
+    - name: Setup .NET Core
+      uses: actions/checkout@v1
+ 
+    - name: Install dependencies
+      run: yarn install
+      
+    - name: Build
+      run: yarn build
+      
+    - name: Start 
+      run: yarn start
 
+  best:
+    name: Test
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+      
+    - name: Install dependencies
+      run: yarn install
+      
+    - name: Start Tests
+      run: yarn test
+ 
