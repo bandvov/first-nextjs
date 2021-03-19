@@ -3,8 +3,9 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 ## Getting Started
 
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/0dc76df07c304c91b1c950fbf66bf619)](https://app.codacy.com/gh/vvas1/cars?utm_source=github.com&utm_medium=referral&utm_content=vvas1/cars&utm_campaign=Badge_Grade)
-[![first-nextjs](https://circleci.com/gh/bandvov/first-nextjs.svg?style=svg)](https://app.circleci.com/pipelines/github/bandvov/first-nextjs)
+[![.github/workflows/CI](https://github.com/bandvov/first-nextjs/actions/workflows/CI.yml/badge.svg)](https://github.com/bandvov/first-nextjs/actions/workflows/CI.yml)
 [![Codacy Security Scan](https://github.com/bandvov/first-nextjs/actions/workflows/codacy-analysis.yml/badge.svg)](https://github.com/bandvov/first-nextjs/actions/workflows/codacy-analysis.yml)
+[![first-nextjs](https://circleci.com/gh/bandvov/first-nextjs.svg?style=svg)](https://app.circleci.com/pipelines/github/bandvov/first-nextjs)
 
 First, run the development server:
 
