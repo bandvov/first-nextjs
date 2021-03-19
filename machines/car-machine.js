@@ -1,6 +1,6 @@
 import { Machine } from "xstate";
 
-const defaultFilter = {
+export const defaultFilter = {
   brand: "",
   color: "",
   minYear: "",
