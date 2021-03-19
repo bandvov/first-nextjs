@@ -1,3 +1,5 @@
+import { it } from 'mocha';
+
 describe('test main page', () => {
   it('should be visible', () => {
     cy.visit('/');
@@ -7,5 +9,8 @@ describe('test main page', () => {
     cy.get('[data-cy=filters]').children().should('have.length', 7);
     cy.get('[data-cy=main-page-cars]').should('exist').and('be.visible');
     cy.get('[data-cy=main-page-cars]').children().should('have.length', 12);
+  });
+  it('should go to search page', () => {
+    cy.select('brand');
   });
 });

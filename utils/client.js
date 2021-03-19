@@ -1,7 +1,11 @@
-import ApolloClient from "apollo-boost";
-import { InMemoryCache } from "apollo-cache-inmemory";
+import ApolloClient from 'apollo-boost';
+import { InMemoryCache } from 'apollo-cache-inmemory';
+
+const PORT = process.env.PORT || 3000;
+const path = process.env.ENV_NODE ==='development'?`http://localhost:${PORT}`:'https://vcars.herokuapp.com';
+
 
 export const client = new ApolloClient({
-  uri: "http://localhost:3000/api/graphql",
+  uri: `${path}/api/graphql`,
   cache: new InMemoryCache({ addTypename: false }).restore({}),
 });
