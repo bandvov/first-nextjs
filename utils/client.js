@@ -5,7 +5,7 @@ const PORT = process.env.PORT || 3000;
 const path = process.env.ENV;
 const basePath =
   path === 'development'
-    ? `http://localhost:${PORT}`
+    ? `http://localhost:3000`
     : 'https://vcars.herokuapp.com';
 
     export const client = new ApolloClient({
