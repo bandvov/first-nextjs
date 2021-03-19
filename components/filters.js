@@ -91,7 +91,7 @@ export default function Filters() {
       <Facet data={prices} name="minPrice" />
       <Facet data={prices} name="maxPrice" />
       <Button color="secondary" variant="outlined" onClick={clearFilterHandler}>
-        clear all filters
+        clear filters
       </Button>
     </div>
   );

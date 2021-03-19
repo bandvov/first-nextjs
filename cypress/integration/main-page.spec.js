@@ -1,4 +1,3 @@
-import { it } from 'mocha';
 
 describe('test main page', () => {
   it('should be visible', () => {

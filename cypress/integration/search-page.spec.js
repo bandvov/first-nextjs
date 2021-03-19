@@ -1,4 +1,3 @@
-import carMachine from '../../machines/car-machine';
 
 describe('Test search page', () => {
   it('should be visible', () => {
