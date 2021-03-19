@@ -12,7 +12,7 @@
     "lint:fix": "eslint --fix --color .",
     "stylelint": "stylelint .",
     "stylelint:fix": "stylelint --fix .",
-    "test": "cypress open"
+    "test": "cypress run"
   },
   "dependencies": {
     "@material-ui/core": "^4.11.2",
