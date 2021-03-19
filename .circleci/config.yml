@@ -11,8 +11,6 @@ workflows:
           yarn: true
           requires:
             - cypress/install      
-          parallel: true
-          parallelism: 4
-          start: yarn start
+          start: yarn CI:start
           wait-on: 'http://localhost:3000'
     

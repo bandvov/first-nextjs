@@ -1,0 +1,25 @@
+on:
+  push:
+    branches: [ main, development ]
+  pull_request:
+    branches: [ main, development ]
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+ 
+    - name: Install dependencies
+      run: yarn install
+      
+    - name: Build
+      run: yarn build
+      
+    - name: Start 
+      env:
+        MONGO_URL: ${{ secrets.MONGO_URL }}
+      run: yarn CI:start & sleep 30 &
+      
+    - name: test
+      run: yarn test
