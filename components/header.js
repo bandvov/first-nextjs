@@ -37,7 +37,7 @@ export default function Header() {
         <a>
           {" "}
           <h1>
-            CARS on heroku
+            CARS
           </h1>
         </a>
       </Link>
