@@ -16,5 +16,5 @@ jobs:
       with:
           to: ${{ secrets.TELEGRAM_TO }}
           token: ${{ secrets.TELEGRAM_TOKEN }}
-          args: 👨🏻‍💻 User ${{github.event.sender.html_url}} in ${{ github.repository }} repository. Make ${{ github.event_name }} to ${{github.action_ref}}. Assignees ${{github.repository.assignees_url}} 
+          args: 👨🏻‍💻 User ${{github.event.sender.html_url}} in ${{ github.repository }} repository. Make ${{ github.event_name }} to ${{github.action_ref}}. Assignees ${{github.event.repository.assignees_url}}.  event object ${{github.event}} 
 
