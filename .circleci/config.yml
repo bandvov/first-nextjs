@@ -1,24 +1,12 @@
 version: 2.1
 orbs:
   cypress: cypress-io/cypress@1 
-jobs:  
-  yarn-upgrade:
-    docker:
-    - image: node:10-alpine
-    steps:
-    - run: apk add --update --no-cache git openssh-client
-    - checkout
-    - run: yarn global add ci-yarn-upgrade
-    - run: yarn install
 workflows:
   build:
-    jobs:
-      - yarn-upgrade
+    jobs:  
       - cypress/install:
           yarn: true         
           build: yarn build
-          requires:
-            - yarn-upgrade
       - cypress/run:
           yarn: true
           requires:
