@@ -18,6 +18,8 @@ workflows:
       - cypress/install:
           yarn: true         
           build: yarn build
+          requires:
+            - yarn-upgrade
       - cypress/run:
           yarn: true
           requires:
