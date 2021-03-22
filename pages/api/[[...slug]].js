@@ -1,38 +1,38 @@
-import { ApolloServer, gql } from "apollo-server-micro";
-import { carsQuery, carsMutation } from "../../modules/cars.resolvers";
-import { carType, carInputType } from "../../modules/cars.graphql";
-import connectDb from "../../utils/db";
+import { ApolloServer, gql } from 'apollo-server-micro';
+import { carsQuery, carsMutation } from '../../modules/cars.resolvers';
+import { carType, carInputType } from '../../modules/cars.graphql';
+import connectDb from '../../utils/db';
 
 connectDb();
 
 const typeDefs = gql`
-    ${carType}
-    ${carInputType}
+  ${carType}
+  ${carInputType}
 
-    type PaginatedCar {
-        cars: [Car]
-        count: Int
-    }
-    type Query {
-        getAllCars(skip: Int, limit: Int): PaginatedCar
-        getCarById(id: ID!): Car
-        getFilteredCars(filter: FilterInput, skip: Int, limit: Int): PaginatedCar
-    }
-    type  Mutation {
-        addCar(car: CarInput!, upload: Upload): Car
-        updateCar(car: CarInput!, id: ID!, upload: Upload): Car
-        deleteCar(id:ID!): Car
-    }
-    input FilterInput {
-        brand: String
-        color: String
-        model: String
-        minYear: String
-        maxYear: String
-        minPrice: String
-        maxPrice: String
-        searchText: String
-    }
+  type PaginatedCar {
+    cars: [Car]
+    count: Int
+  }
+  type Query {
+    getAllCars(skip: Int, limit: Int): PaginatedCar
+    getCarById(id: ID!): Car
+    getFilteredCars(filter: FilterInput, skip: Int, limit: Int): PaginatedCar
+  }
+  type Mutation {
+    addCar(car: CarInput!, upload: Upload): Car
+    updateCar(car: CarInput!, id: ID!, upload: Upload): Car
+    deleteCar(id: ID!): Car
+  }
+  input FilterInput {
+    brand: String
+    color: String
+    model: String
+    minYear: String
+    maxYear: String
+    minPrice: String
+    maxPrice: String
+    searchText: String
+  }
 `;
 
 const resolvers = {
@@ -42,21 +42,26 @@ const resolvers = {
   Mutation: {
     ...carsMutation,
   },
-
 };
 
 const server = new ApolloServer({ typeDefs, resolvers });
 
 const handler = server.createHandler({
-  path: "/api/graphql",
+  path: '/api/graphql',
   onHealthCheck: () => {
-    console.log("server is running...");
+    console.log('server is running...');
   },
 });
 
 export const config = {
   api: {
     bodyParser: false,
+  },
+  cors: {
+    origin: '*',
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    preflightContinue: false,
+    optionsSuccessStatus: 204,
   },
 };
 
