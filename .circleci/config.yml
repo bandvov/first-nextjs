@@ -10,7 +10,6 @@ jobs:
     - checkout
     - run: yarn global add ci-yarn-upgrade
     - run: yarn install
-    - run: ci-yarn-upgrade --execute --verbose;
 workflows:
   build:
     jobs:
