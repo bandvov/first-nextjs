@@ -1,7 +1,7 @@
-import { ApolloServer, gql } from 'apollo-server-micro';
-import { carsQuery, carsMutation } from '../../modules/cars.resolvers';
-import { carType, carInputType } from '../../modules/cars.graphql';
-import connectDb from '../../utils/db';
+import { ApolloServer, gql } from "apollo-server-micro";
+import { carsQuery, carsMutation } from "../../modules/cars.resolvers";
+import { carType, carInputType } from "../../modules/cars.graphql";
+import connectDb from "../../utils/db";
 
 connectDb();
 
@@ -47,9 +47,9 @@ const resolvers = {
 const server = new ApolloServer({ typeDefs, resolvers });
 
 const handler = server.createHandler({
-  path: '/api/graphql',
+  path: "/api/graphql",
   onHealthCheck: () => {
-    console.log('server is running...');
+    console.log("server is running...");
   },
 });
 
@@ -58,8 +58,8 @@ export const config = {
     bodyParser: false,
   },
   cors: {
-    origin: '*',
-    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    origin: "*",
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
     preflightContinue: false,
     optionsSuccessStatus: 204,
   },

@@ -1,13 +1,13 @@
-import { useContext, useEffect, useState } from 'react';
-import PropTypes from 'prop-types';
-import { Fade } from '@material-ui/core';
-import MainLayout from '../components/main-layout';
-import Filters from '../components/filters';
-import { CarListItem } from '../components/car-list-item/car-list-item';
-import styles from '../styles/Home.module.css';
-import { getAllCars } from '../operations/car-operations';
-import CustomCircularProgress from '../components/custom-circular-progress/custom-circullar-progress';
-import { MainContext } from '../context/mainContext';
+import { useContext, useEffect, useState } from "react";
+import PropTypes from "prop-types";
+import { Fade } from "@material-ui/core";
+import MainLayout from "../components/main-layout";
+import Filters from "../components/filters";
+import { CarListItem } from "../components/car-list-item/car-list-item";
+import styles from "../styles/Home.module.css";
+import { getAllCars } from "../operations/car-operations";
+import CustomCircularProgress from "../components/custom-circular-progress/custom-circullar-progress";
+import { MainContext } from "../context/mainContext";
 
 export default function Home({ cars = [] }) {
   const { state, send } = useContext(MainContext);
@@ -16,7 +16,7 @@ export default function Home({ cars = [] }) {
 
   useEffect(() => {
     send({
-      type: 'SET_LOADING',
+      type: "SET_LOADING",
       loading: false,
     });
     setShow(true);
@@ -64,6 +64,6 @@ Home.propTypes = PropTypes.shape({
       photo: PropTypes.string.isRequired,
       price: PropTypes.number.isRequired,
       year: PropTypes.number.isRequired,
-    }).isRequired
+    }).isRequired,
   ).isRequired,
 }).isRequired;

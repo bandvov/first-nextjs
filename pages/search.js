@@ -56,11 +56,11 @@ export default function Search({
       {state.context.loading ? (
         <CustomCircularProgress />
       ) : (
-        <Paper data-cy='search-page-cars' className={styles.cars}>
+        <Paper data-cy="search-page-cars" className={styles.cars}>
           {mappedCars}
         </Paper>
       )}
-      <Pagination 
+      <Pagination
         style={{ marginTop: "1rem" }}
         color="primary"
         count={Math.ceil(count / carsPerPage)}
