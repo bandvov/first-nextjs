@@ -1,5 +1,5 @@
-import ApolloClient from 'apollo-boost';
-import { InMemoryCache } from 'apollo-cache-inmemory';
+import ApolloClient from "apollo-boost";
+import { InMemoryCache } from "apollo-cache-inmemory";
 
 const PORT = process.env.PORT || 3000;
 // const path =

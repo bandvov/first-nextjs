@@ -9,7 +9,7 @@
     "start": "next start -p $PORT",
     "export": "next export",
     "lint": "eslint .",
-    "lint:fix": "eslint --fix --color .",
+    "lint:fix": "eslint . --fix --color",
     "stylelint": "stylelint .",
     "stylelint:fix": "stylelint --fix .",
     "test": "cypress run"
