@@ -6,6 +6,7 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 [![.github/workflows/CI](https://github.com/bandvov/first-nextjs/actions/workflows/CI.yml/badge.svg)](https://github.com/bandvov/first-nextjs/actions/workflows/CI.yml)
 [![Codacy Security Scan](https://github.com/bandvov/first-nextjs/actions/workflows/codacy-analysis.yml/badge.svg)](https://github.com/bandvov/first-nextjs/actions/workflows/codacy-analysis.yml)
 [![first-nextjs](https://circleci.com/gh/bandvov/first-nextjs.svg?style=svg)](https://app.circleci.com/pipelines/github/bandvov/first-nextjs)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=bandvov_first-nextjs&metric=alert_status)](https://sonarcloud.io/dashboard?id=bandvov_first-nextjs)
 
 First, run the development server:
 
