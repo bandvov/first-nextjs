@@ -8,6 +8,7 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 [![first-nextjs](https://circleci.com/gh/bandvov/first-nextjs.svg?style=svg)](https://app.circleci.com/pipelines/github/bandvov/first-nextjs)
 
 
+
 First, run the development server:
 
 ```bash
