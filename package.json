@@ -30,7 +30,7 @@
     "eslint-plugin-node": "^11.1.0",
     "formik": "^2.2.5",
     "graphql": "^15.4.0",
-    "graphql-upload": "^11.0.0",
+    "graphql-upload": "^13.0.0",
     "mongoose": "^5.12.1",
     "next": "10.2.3",
     "prop-types": "^15.7.2",
