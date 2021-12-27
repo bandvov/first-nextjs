@@ -39,7 +39,7 @@
     "react-toastify": "^7.0.3",
     "sass": "^1.29.0",
     "styled-components": "^5.2.1",
-    "stylelint": "^13.8.0",
+    "stylelint": "^14.2.0",
     "stylelint-config-standard": "^22.0.0",
     "xstate": "^4.14.1",
     "yup": "^0.32.9"
