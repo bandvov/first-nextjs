@@ -23,7 +23,7 @@
     "apollo-boost": "^0.4.9",
     "apollo-cache-inmemory": "^1.6.6",
     "apollo-client": "^2.6.10",
-    "apollo-server-micro": "^2.21.1",
+    "apollo-server-micro": "^3.6.2",
     "cloudinary": "^1.23.0",
     "cypress": "^7.4.0",
     "eslint-config-airbnb-base": "^14.2.1",
